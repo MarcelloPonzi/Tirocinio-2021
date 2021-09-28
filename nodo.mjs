@@ -1,7 +1,9 @@
 export default class Nodo {
-    constructor(id, next = null) {
+    constructor(id) {
         this.id = id;
-        //this.prev = prev;
-        this.next = next;
+        this.prev = null;
+        this.next = null;
+        this.archi; //per il momento solo uscenti
     }
+
 }

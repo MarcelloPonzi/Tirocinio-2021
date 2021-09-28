@@ -1,97 +1,119 @@
 import Nodo from './nodo.mjs';
-export default class listaNodi {
+export default class listaConcatenata {
     constructor() {
         this.head = null;
+        this.tail = null;
         this.dimensione = 0;
     }
 
     //inserisci in testa
     inserisciTesta(id) {
-        this.head = new Nodo(id, this.head)
+        let nuovoNodo = new Nodo(id);
+
+        //se la lista è vuota
+        if (!this.dimensione) {
+            this.head = nuovoNodo;
+            this.tail = nuovoNodo;
+        } else {
+
+            this.head.prev = nuovoNodo;
+            nuovoNodo.next = this.head;
+            this.head = nuovoNodo;
+
+        }
         this.dimensione++;
+        return newNodo;
     }
 
     //inserisci In coda
     inserisciCoda(id) {
-        let nodo = new Nodo(id);
-        let corrente;
+        const nuovoNodo = new Nodo(id);
+
 
         //se vuoto, allora aggiungi in testa
-        if (!this.head) {
-            this.head = nodo;
+        if (!this.dimensione) {
+            this.head = nuovoNodo;
+            this.tail = nuovoNodo;
         } else {
-            corrente = this.head;
+            this.tail.next = nuovoNodo;
+            nuovoNodo.prev = this.tail;
+            this.tail = nuovoNodo;
 
-            while (corrente.next) {
-                corrente = corrente.next;
-            }
-            corrente.next = nodo;
+
+
         }
         this.dimensione++;
-    }
-    //inserisci in indice 
-    aggiungiIn(id, indice) {
-        //indice fuori range
-        if (indice > 0 && indice > this.dimensione) {
-            return;
-        }
 
-        //se primo indice
-        if (index === 0) {
-            this.inserisciTesta(id);
-        }
-
-        const nodo = new Nodo(id);
-        let corrente, prev;
-        corrente = this.head;
-
-        for (i = 0; i < indice; i++) {
-            prev = corrente; //nodo prima dell'indice
-            i++;
-            corrente = corrente.next; //nodo dopo l'indice
-        }
-        nodo.next = corrente;
-        previous.next = nodo;
-        this.dimensione++;
-    }
-    //prendi a indice
-    prendiIn(indice) {
-        let corrente = this.head;
-        for (let i = 0; corrente; i++) {
-            if (i == indice) {
-                console.log(corrente.id);
-            }
-            corrente = corrente.next;
-        }
-
-
+        return newNodo;
     }
 
-    //rimuovi a indice
-    rimuoviIn(indice) {
-        if (indice > 0 && indice > this.dimensione) {
-            return;
-        }
-
-        let corrente = this.head;
-        let prev;
-        if (indice === 0) {
-            this.head = corrente.next;
+    //rimuovi nodo con argomento nodo
+    rimuoviNodo(nodoDaRimuovere) {
+        if (!this.dimensione) {
+            return null;
         } else {
-            for (let i = 0; i < indice; i++) {
-                prev = corrente;
-                corrente = corrente.next;
+            if (this.dimensione === 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                nodoDaRimuovere.prev.next = nodoDaRimuovere.next;
+                nodoDaRimuovere.next.prev = nodoDaRimuovere.prev;
+                nodoDaRimuovere.next = null;
+                nodoDaRimuovere.prev = null;
             }
-            prev.next = corrente.next;
+            this.dimensione--;
+            return nodoDaRimuovere;
         }
-        this.dimensione--;
+    }
+
+    //rimuovi testa
+    rimuoviTesta() {
+        if (!this.dimensione) {
+            return null;
+        } else {
+            const nodoDaRimuovere = this.head;
+            if (this.dimensione === 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.head = nodoDaRimuovere.next;
+                this.head.prev = null;
+                nodoDaRimuovere.next = null;
+            }
+            this.dimensione--;
+            return nodoDaRimuovere;
+        }
+    }
+
+
+    //rimuovi coda
+    rimuoviCoda() {
+        //se vuota non puoi cancellare
+        if (!this.dimensione) {
+            return null;
+        } else {
+            const nodoDaRimuovere = this.tail;
+            if (this.dimensione === 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.tail = nodoDaRimuovere.prev;
+                this.tail.next = null;
+                nodoDaRimuovere.prev = null;
+            }
+            this.dimensione--;
+            return nodoDaRimuovere;
+        }
 
     }
+
+
     //Svuota lista
     svuotaLista() {
         this.head = null;
+        this.tail = null;
         this.dimensione = 0;
-        //come rimuovere lista?
+        //come rimuovere lista dalla memoria?
     }
     //stampa lista
     stampaListaNodi() {
@@ -107,13 +129,3 @@ export default class listaNodi {
     }
 
 }
-
-const ln = new listaNodi();
-ln.inserisciTesta(100);
-ln.inserisciTesta(200);
-ln.inserisciTesta(300);
-ln.inserisciCoda(400);
-ln.stampaListaNodi();
-
-ln.rimuoviIn(2);
-ln.stampaListaNodi();
