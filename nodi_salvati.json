@@ -1,0 +1,11 @@
+[
+    {"id":3,"adiacenti":[5]},
+
+    {"id":4,"adiacenti":[3,5]},
+
+    {"id":5,"adiacenti":[]}
+   
+]
+//riflettere su come voglio salvare i miei nodi (esempio lista), deve essere facilmente editabile
+//2 liste archi e nodi
+// Sezione con caratteristiche dei nodi e degli archi
