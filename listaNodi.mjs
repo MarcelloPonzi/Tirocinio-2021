@@ -1,5 +1,4 @@
-import Nodo from './nodo.mjs';
-export default class listaConcatenata {
+export default class listaConcatenataNodo {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -7,8 +6,8 @@ export default class listaConcatenata {
     }
 
     //inserisci in testa
-    inserisciTesta(id) {
-        let nuovoNodo = new Nodo(id);
+    inserisciTesta(nuovoNodo) {
+
 
         //se la lista è vuota
         if (!this.dimensione) {
@@ -22,12 +21,12 @@ export default class listaConcatenata {
 
         }
         this.dimensione++;
-        return newNodo;
+        return nuovoNodo;
     }
 
     //inserisci In coda
-    inserisciCoda(id) {
-        const nuovoNodo = new Nodo(id);
+    inserisciCoda(nuovoNodo) {
+
 
 
         //se vuoto, allora aggiungi in testa
@@ -44,7 +43,7 @@ export default class listaConcatenata {
         }
         this.dimensione++;
 
-        return newNodo;
+        return nuovoNodo;
     }
 
     //rimuovi nodo con argomento nodo
@@ -71,7 +70,7 @@ export default class listaConcatenata {
         if (!this.dimensione) {
             return null;
         } else {
-            const nodoDaRimuovere = this.head;
+            let nodoDaRimuovere = this.head;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
@@ -92,7 +91,7 @@ export default class listaConcatenata {
         if (!this.dimensione) {
             return null;
         } else {
-            const nodoDaRimuovere = this.tail;
+            let nodoDaRimuovere = this.tail;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
@@ -113,7 +112,7 @@ export default class listaConcatenata {
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        //come rimuovere lista dalla memoria?
+        //come rimuovere lista e relativi oggetti dalla memoria?
     }
     //stampa lista
     stampaListaNodi() {
