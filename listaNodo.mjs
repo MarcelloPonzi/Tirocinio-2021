@@ -1,4 +1,5 @@
-export default class listaConcatenataNodo {
+
+export default class listaNodo {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -109,22 +110,46 @@ export default class listaConcatenataNodo {
 
     //Svuota lista
     svuotaLista() {
+        while(this.head){
+            this.rimuoviTesta();
+        }
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        //come rimuovere lista e relativi oggetti dalla memoria?
+        //come rimuovere lista e relativi oggetti dalla memoria? Se riaggiungo uno stesso nodo di nuovo ho problemi
     }
     //stampa lista
     stampaListaNodi() {
+        console.log("\nLista nodi: ")
         let corrente = this.head;
         while (corrente) {
-            console.log(corrente.id);
+            console.log(corrente);
             corrente = corrente.next;
+            
         }
     }
     //stampa dimensione
     stampaDimensione() {
+        console.log("\nLa dimensione è: ")
         console.log(this.dimensione);
+    }
+
+    stampaListaStringa() {
+        if (!this.dimensione) {
+            console.log("Lista vuota");
+            
+        } else {
+            console.log("\nNodi lista: ")
+            let st = "";
+            let corrente = this.head
+            while (corrente) {
+                st += String(corrente.id);
+                st += " -> ";
+                corrente = corrente.next;
+            }
+            st+="null";
+            console.log(st);
+        }
     }
 
 }
