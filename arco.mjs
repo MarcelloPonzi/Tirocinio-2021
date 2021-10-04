@@ -1,10 +1,11 @@
 class Arco {
     constructor(id) {
         this.id = id;
-        this.pos
-        this.from
-        this.to
-        this.frompos
-        this.topos
+        this.prevG;
+        this.nextG;
+        this.prevN;
+        this.prevG;
+        this.from;
+        this.to;
     }
 };
