@@ -1,0 +1,13 @@
+1.
+Codice ridondante a causa delle due liste di archi uscenti ed entranti che manipolano proprietà differenti di Arco.
+Si potrebbe inserire in paramentro opzionale nel costruttore della lista. Se il parametro opzionale è presente esegue dei metodi, in alternativa
+degli altri. Però avrei comunque del codice ridondante in un'unica classe.
+
+2.
+Lista adiacenza per rappresentare le adiacenze.
+
+3.
+Va bene lista doppiamente concatenata?
+Applicare patterne dei prototipi (sottoclassi) alle liste.
+https://www.html.it/pag/55411/prototipi-e-classi/
+http://www.datrevo.com/la-classi-in-javascript/

@@ -1,5 +1,5 @@
 
-export default class listaNodo {
+export default class ListaNodi {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -116,7 +116,7 @@ export default class listaNodo {
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        //come rimuovere lista e relativi oggetti dalla memoria? Se riaggiungo uno stesso nodo di nuovo ho problemi
+        
     }
     //stampa lista
     stampaListaNodi() {
@@ -136,10 +136,10 @@ export default class listaNodo {
 
     stampaListaStringa() {
         if (!this.dimensione) {
-            console.log("Lista vuota");
+            console.log("\nLista nodi vuota");
             
         } else {
-            console.log("\nNodi lista: ")
+            console.log("\nLista nodi: ")
             let st = "";
             let corrente = this.head
             while (corrente) {

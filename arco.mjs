@@ -1,14 +1,16 @@
 class Arco {
-    constructor(id) {
-        this.id = id;
-        //riferimenti lista doppiamente concatenata grafo
+    constructor(from,to) {
+        //riferimenti lista archi grafo
         this.prevG;
         this.nextG;
-        //riferimenti lista doppiamente concatenata grafo
-        this.prevN;
-        this.nextN;
+        //riferimenti lista archi uscenti nodo
+        this.prevUscN;
+        this.nextUscN;
+        //riferimenti lista archi entranti nodo
+        this.prevEntrN;
+        this.nextEntrN;
+        //riferimenti a nodi agli estremi dell'arco
         this.from;
         this.to;
-        //Si potrebbero aggiungere altri riferimenti in caso di liste di archi uscenti ed entranti separate
     }
 };

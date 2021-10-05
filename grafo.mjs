@@ -1,9 +1,10 @@
-import listaNodo from './listaNodo.mjs';
-import Nodo from './nodo.mjs';
+import ListaArchiGrafo from './listaArchiGrafo.mjs';
+import ListaNodiGrafo from './listaNodiGrafo.mjs';
 export default class Grafo{
     constructor(){
-        this.listaNodi = new listaNodo();
-        this.listaArchi; //aggiungere la creazione della lista
+        this.listaNodi = new ListaNodiGrafo();
+        this.listaArchi= new ListaArchiGrafo(); //aggiungere la creazione della lista
+        this.listaAdiacenze; //TODO
     }
 
     aggiungiNodo(nuovoNodo) {

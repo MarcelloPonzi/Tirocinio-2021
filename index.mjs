@@ -1,6 +1,6 @@
 "use strict";
-import listaNodo from './listaNodo.mjs';
 import Nodo from './nodo.mjs';
+import Arco from './arco.mjs';
 import Grafo from './grafo.mjs';
 
 const grafo = new Grafo();
