@@ -1,4 +1,4 @@
-export default class ListaArchiEntrantiNodo{
+export default class ListaArchiEntrantiNodo {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -6,12 +6,13 @@ export default class ListaArchiEntrantiNodo{
     }
 
     //inserisci in testa
-    inserisciTesta(nuovoArco) {
+    inserisciTesta(nuovoArco, attribute) { //inserisciTesta(nuovoArco, "Stringa proprietà")
 
         //se la lista è vuota
         if (!this.dimensione) {
             this.head = nuovoArco;
             this.tail = nuovoArco;
+
         } else {
 
             this.head.prevEntrN = nuovoArco;
@@ -108,13 +109,13 @@ export default class ListaArchiEntrantiNodo{
 
     //Svuota lista
     svuotaLista() {
-        while(this.head){
+        while (this.head) {
             this.rimuoviTesta();
         }
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        
+
     }
     //stampa lista
     stampaListaArchi() {
@@ -123,7 +124,7 @@ export default class ListaArchiEntrantiNodo{
         while (corrente) {
             console.log(corrente);
             corrente = corrente.nextEntrN;
-            
+
         }
     }
     //stampa dimensione
@@ -135,7 +136,7 @@ export default class ListaArchiEntrantiNodo{
     stampaListaStringa() {
         if (!this.dimensione) {
             console.log("\nLista archi vuota.");
-            
+
         } else {
             console.log("\nLista archi entranti nel nodo: ")
             let st = "";
@@ -149,7 +150,7 @@ export default class ListaArchiEntrantiNodo{
                 st += " -> ";
                 corrente = corrente.nextEntrN;
             }
-            st+="null";
+            st += "null";
             console.log(st);
         }
     }
