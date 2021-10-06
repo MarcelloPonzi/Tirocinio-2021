@@ -1,41 +1,77 @@
-import ListaArchiGrafo from './listaArchiGrafo.mjs';
-import ListaNodiGrafo from './listaNodiGrafo.mjs';
-export default class Grafo{
-    constructor(){
-        this.listaNodi = new ListaNodiGrafo();
-        this.listaArchi= new ListaArchiGrafo(); //aggiungere la creazione della lista
+import ListaArchi from './archi.mjs';
+import ListaNodi from './listaNodi.mjs';
+export default class Grafo {
+    constructor() {
+        this.nodi = new ListaNodi();
+        this.archi = new ListaArchi("listaArchiGrafo");
         this.listaAdiacenze; //TODO
     }
 
     aggiungiNodo(nuovoNodo) {
         //controllo in tempo costante se il nodo è già inserito(probabilmente inutile se creo due nodi con lo stesso id)
-        if(this.listaNodi.dimensione==0){
-            this.listaNodi.inserisciTesta(nuovoNodo);
+        if (this.nodi.dimensione == 0) {
+            this.nodi.inserisciTesta(nuovoNodo);
+        } else
+        if (this.nodi.dimensione == 1 && !(this.nodi.head == nuovoNodo)) {
+            this.nodi.inserisciCoda(nuovoNodo);
+        } else {
+            //se il nodo non ha prev e next non è già stato inserito
+            if (nuovoNodo.next == null && nuovoNodo.prev == null && this.nodi.dimensione > 1) {
+                this.nodi.inserisciCoda(nuovoNodo);
+            }
         }
-
-        
-        else
-            if(this.listaNodi.dimensione==1 && !(this.listaNodi.head==nuovoNodo)){
-                this.listaNodi.inserisciCoda(nuovoNodo);
-            }
-            else{
-                //se il nodo non ha prev e next non è già stato inserito
-                if(nuovoNodo.next==null && nuovoNodo.prev==null && this.listaNodi.dimensione>1){
-                    this.listaNodi.inserisciCoda(nuovoNodo);
-                }
-            }
-        
-        
     }
 
     rimuoviNodo(nodo) {
-        return this.listaNodi.rimuoviNodo(nodo);
+        return this.nodi.rimuoviNodo(nodo);
     }
 
     stampaNodi() {
-       //this.listaNodi.stampaListaNodi();
-        this.listaNodi.stampaListaStringa();
-        this.listaNodi.stampaDimensione();
+        this.nodi.stampaListaNodi();
+        this.nodi.stampaListaStringa();
+        this.nodi.stampaDimensione();
     }
+
+    aggiungiArco(arco) {
+        //aggiunge arco alla lista degli archi del grafo
+        this.archi.inserisciTesta(arco, 'nextG', 'prevG');
+
+        //aggiunge arco alla lista degli archi uscenti dal nodo
+        arco.from.archiUscenti.inserisciTesta(arco, 'nextUscN', 'prevUscN');
+
+        //aggiunge arco alla lista degli archi entranti nel nodo
+        arco.to.archiEntranti.inserisciTesta(arco, 'nextEntrN', 'prevEntrN');
+    }
+
+    rimuoviArco(arco) {
+        //rimuove arco alla lista degli archi del grafo
+        this.archi.rimuoviArco(arco, 'nextG', 'prevG');
+
+        //aggiunge arco alla lista degli archi uscenti dal nodo
+        arco.from.archiUscenti.rimuoviArco(arco, 'nextUscN', 'prevUscN');
+
+        //aggiunge arco alla lista degli archi entranti nel nodo
+        arco.to.archiEntranti.rimuoviArco(arco, 'nextEntrN', 'prevEntrN');
+    }
+
+    stampaArchi() {
+        this.archi.stampaListaArchi('nextG');
+        this.archi.stampaListaStringa('nextG');
+        this.archi.stampaDimensione();
+    }
+
+    stampaArchiUscentiNodo(nodo) {
+        nodo.listaUscenti.stampaListaArchi('nextUscN');
+        nodo.listaUscenti.stampaListaStringa('nextUscN');
+        nodo.listaUscenti.stampaDimensione();
+
+    }
+
+    stampaArchiEntrantiNodo(nodo) {
+        nodo.listaUscenti.stampaListaArchi('nextEntrN');
+        nodo.listaUscenti.stampaListaStringa('nextEntrN');
+        nodo.listaUscenti.stampaDimensione();
+    }
+
 
 }

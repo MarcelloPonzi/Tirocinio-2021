@@ -1,0 +1,6 @@
+1.
+Ho sfruttato il loose type per usare una sola lista che gestisca le varie proprietà differenti dell'arco. Passo come parametro una stringa col nome della proprietà,
+poi la funzione accede alla proprietà grazie alla stringa conservata in un parametro.
+Potrei fare un'unica lista concatenata (le 3 degli archi + quella dei nodi), ma potrebbe darmi problemi nel debugging. Per il momento userò due liste, una per archi e l'altra per nodi.
+
+2.tipo della lista, workaround? Per esempio potrei usare costanti global

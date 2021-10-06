@@ -1,22 +1,22 @@
-export default class ListaArchiEntrantiNodo {
-    constructor() {
+export default class ListaArchi {
+    constructor(tipo) {
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
+        this.tipo = tipo; //3 tipi: listaArchiGrafo, listaUscenti, listaEntranti (potrei fare variabili globali per il tipo)
     }
 
     //inserisci in testa
-    inserisciTesta(nuovoArco, attribute) { //inserisciTesta(nuovoArco, "Stringa proprietà")
+    inserisciTesta(nuovoArco, next, prev) {
 
         //se la lista è vuota
         if (!this.dimensione) {
             this.head = nuovoArco;
             this.tail = nuovoArco;
-
         } else {
 
-            this.head.prevEntrN = nuovoArco;
-            nuovoArco.nextEntrN = this.head;
+            this.head[prev] = nuovoArco;
+            nuovoArco[next] = this.head;
             this.head = nuovoArco;
 
         }
@@ -34,8 +34,8 @@ export default class ListaArchiEntrantiNodo {
             this.head = nuovoArco;
             this.tail = nuovoArco;
         } else {
-            this.tail.nextEntrN = nuovoArco;
-            nuovoArco.prevEntrN = this.tail;
+            this.tail[next] = nuovoArco;
+            nuovoArco[prev] = this.tail;
             this.tail = nuovoArco;
 
 
@@ -47,7 +47,7 @@ export default class ListaArchiEntrantiNodo {
     }
 
     //rimuovi nodo con argomento nodo
-    rimuoviNodo(arcoDaRimuovere) {
+    rimuoviNodo(arcoDaRimuovere, next, prev) {
         if (!this.dimensione) {
             return null;
         } else {
@@ -55,10 +55,10 @@ export default class ListaArchiEntrantiNodo {
                 this.head = null;
                 this.tail = null;
             } else {
-                arcoDaRimuovere.prevEntrN.nextEntrN = arcoDaRimuovere.nextEntrN;
-                arcoDaRimuovere.nextEntrN.prevEntrN = arcoDaRimuovere.prevEntrN;
-                arcoDaRimuovere.nextEntrN = null;
-                arcoDaRimuovere.prevEntrN = null;
+                arcoDaRimuovere[prev][next] = arcoDaRimuovere[next];
+                arcoDaRimuovere[next][prev] = arcoDaRimuovere[prev];
+                arcoDaRimuovere[next] = null;
+                arcoDaRimuovere[prev] = null;
             }
             this.dimensione--;
             return arcoDaRimuovere;
@@ -66,7 +66,7 @@ export default class ListaArchiEntrantiNodo {
     }
 
     //rimuovi testa
-    rimuoviTesta() {
+    rimuoviTesta(next, prev) {
         if (!this.dimensione) {
             return null;
         } else {
@@ -75,9 +75,9 @@ export default class ListaArchiEntrantiNodo {
                 this.head = null;
                 this.tail = null;
             } else {
-                this.head = arcoDaRimuovere.nextEntrN;
-                this.head.prevEntrN = null;
-                arcoDaRimuovere.nextEntrN = null;
+                this.head = arcoDaRimuovere[next];
+                this.head[prev] = null;
+                arcoDaRimuovere[next] = null;
             }
             this.dimensione--;
             return arcoDaRimuovere;
@@ -86,7 +86,7 @@ export default class ListaArchiEntrantiNodo {
 
 
     //rimuovi coda
-    rimuoviCoda() {
+    rimuoviCoda(next, prev) {
         //se vuota non puoi cancellare
         if (!this.dimensione) {
             return null;
@@ -96,9 +96,9 @@ export default class ListaArchiEntrantiNodo {
                 this.head = null;
                 this.tail = null;
             } else {
-                this.tail = arcoDaRimuovere.prevEntrN;
-                this.tail.nextEntrN = null;
-                arcoDaRimuovere.prevEntrN = null;
+                this.tail = arcoDaRimuovere[prev];
+                this.tail[next] = null;
+                arcoDaRimuovere[prev] = null;
             }
             this.dimensione--;
             return arcoDaRimuovere;
@@ -118,12 +118,15 @@ export default class ListaArchiEntrantiNodo {
 
     }
     //stampa lista
-    stampaListaArchi() {
-        console.log("\nLista archi entranti nel nodo: ")
+    stampaListaArchi(next) {
+        if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
+        if (this.tipo == "listaArchiUscenti") console.log("\nLista archi uscenti dal nodo: ");
+        if (this.tipo == "listaArchientranti") console.log("\nLista archi uscenti dal nodo: ");
+
         let corrente = this.head;
         while (corrente) {
             console.log(corrente);
-            corrente = corrente.nextEntrN;
+            corrente = corrente[next];
 
         }
     }
@@ -133,12 +136,16 @@ export default class ListaArchiEntrantiNodo {
         console.log(this.dimensione);
     }
 
-    stampaListaStringa() {
+    stampaListaStringa(next) {
         if (!this.dimensione) {
-            console.log("\nLista archi vuota.");
+            if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
+            if (this.tipo == "listaArchiUscenti") console.log("\nLista archi uscenti dal nodo: ");
+            if (this.tipo == "listaArchientranti") console.log("\nLista archi uscenti dal nodo: ");
 
         } else {
-            console.log("\nLista archi entranti nel nodo: ")
+            if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
+            if (this.tipo == "listaArchiUscenti") console.log("\nLista archi uscenti dal nodo: ");
+            if (this.tipo == "listaArchientranti") console.log("\nLista archi uscenti dal nodo: ");
             let st = "";
             let corrente = this.head
             while (corrente) {
@@ -148,10 +155,11 @@ export default class ListaArchiEntrantiNodo {
                 st += String(corrente.to.id);
                 st += ")"
                 st += " -> ";
-                corrente = corrente.nextEntrN;
+                corrente = corrente[next];
             }
             st += "null";
             console.log(st);
         }
     }
+
 }

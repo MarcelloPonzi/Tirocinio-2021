@@ -1,5 +1,5 @@
-class Arco {
-    constructor(from,to) {
+export default class Arco {
+    constructor(from, to) {
         //riferimenti lista archi grafo
         this.prevG;
         this.nextG;
@@ -10,7 +10,7 @@ class Arco {
         this.prevEntrN;
         this.nextEntrN;
         //riferimenti a nodi agli estremi dell'arco
-        this.from;
-        this.to;
+        this.from = from;
+        this.to = to;
     }
 };

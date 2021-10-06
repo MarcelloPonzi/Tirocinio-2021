@@ -1,4 +1,3 @@
-
 export default class ListaNodi {
     constructor() {
         this.head = null;
@@ -110,13 +109,13 @@ export default class ListaNodi {
 
     //Svuota lista
     svuotaLista() {
-        while(this.head){
+        while (this.head) {
             this.rimuoviTesta();
         }
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        
+
     }
     //stampa lista
     stampaListaNodi() {
@@ -125,7 +124,7 @@ export default class ListaNodi {
         while (corrente) {
             console.log(corrente);
             corrente = corrente.next;
-            
+
         }
     }
     //stampa dimensione
@@ -137,7 +136,7 @@ export default class ListaNodi {
     stampaListaStringa() {
         if (!this.dimensione) {
             console.log("\nLista nodi vuota");
-            
+
         } else {
             console.log("\nLista nodi: ")
             let st = "";
@@ -147,9 +146,8 @@ export default class ListaNodi {
                 st += " -> ";
                 corrente = corrente.next;
             }
-            st+="null";
+            st += "null";
             console.log(st);
         }
     }
-
 }
