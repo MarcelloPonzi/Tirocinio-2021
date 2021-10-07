@@ -25,7 +25,7 @@ export default class ListaArchi {
     }
 
     //inserisci In coda
-    inserisciCoda(nuovoArco) {
+    inserisciCoda(nuovoArco, next, prev) {
 
 
 
@@ -108,9 +108,9 @@ export default class ListaArchi {
 
 
     //Svuota lista
-    svuotaLista() {
+    svuotaLista(next, prev) {
         while (this.head) {
-            this.rimuoviTesta();
+            this.rimuoviTesta(next, prev);
         }
         this.head = null;
         this.tail = null;

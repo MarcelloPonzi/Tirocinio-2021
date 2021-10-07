@@ -3,6 +3,4 @@
 2.
 Lista adiacenza per rappresentare le adiacenze?
 
-1.
-Workaround per i tipi di lista? magari usando delle costanti?
 

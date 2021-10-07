@@ -1,4 +1,4 @@
-import ListaArchi from './archi.mjs';
+import ListaArchi from './listaArchi.mjs';
 import ListaNodi from './listaNodi.mjs';
 export default class Grafo {
     constructor() {
@@ -71,6 +71,27 @@ export default class Grafo {
         nodo.listaUscenti.stampaListaArchi('nextEntrN');
         nodo.listaUscenti.stampaListaStringa('nextEntrN');
         nodo.listaUscenti.stampaDimensione();
+    }
+
+    cancellaGrafo() {
+        //svuoto la lista di ogni nodo
+        let corrente = this.nodi.head;
+        while (corrente) {
+            corrente.archiUscenti.svuotaLista("nextUscN", "prevUscN");
+            corrente.archiEntranti.svuotaLista("nextEntrN", "nextEntrN");
+            corrente = corrente.next;
+        }
+        //cancello i riferimenti ai nodi di ogni arco
+        corrente = this.archi.head;
+        while (corrente) {
+            corrente.from = null;
+            corrente.to = null;
+            corrente = corrente.nextG;
+        }
+        //cancello la lista di tutti gli archi e i nodi del grafo
+        this.nodi.svuotaLista();
+        this.archi.svuotaLista("nextG", "prevG");
+        console.log("Grafo cancellato.")
     }
 
 
