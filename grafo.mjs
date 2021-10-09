@@ -5,10 +5,11 @@ export default class Grafo {
         this.nodi = new ListaNodi();
         this.archi = new ListaArchi("listaArchiGrafo");
         this.listaAdiacenze; //TODO
+        //variabile massimo id nodo
     }
 
     aggiungiNodo(nuovoNodo) {
-        //controllo in tempo costante se il nodo è già inserito(probabilmente inutile se creo due nodi con lo stesso id)
+        //controllo in tempo costante se il nodo è già inserito(probabilmente inutile se creo due nodi con lo stesso id)!!!!!! gestione id
         if (this.nodi.dimensione == 0) {
             this.nodi.inserisciTesta(nuovoNodo);
         } else
@@ -27,7 +28,7 @@ export default class Grafo {
     }
 
     stampaNodi() {
-        this.nodi.stampaListaNodi();
+        //this.nodi.stampaListaNodi();
         this.nodi.stampaListaStringa();
         this.nodi.stampaDimensione();
     }
@@ -55,7 +56,7 @@ export default class Grafo {
     }
 
     stampaArchi() {
-        this.archi.stampaListaArchi('nextG');
+        //this.archi.stampaListaArchi('nextG');
         this.archi.stampaListaStringa('nextG');
         this.archi.stampaDimensione();
     }

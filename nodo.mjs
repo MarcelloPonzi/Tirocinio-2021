@@ -8,4 +8,9 @@ export default class Nodo {
         this.archiUscenti = new ListaArchi("listaUscenti");
         this.archiEntranti = new ListaArchi("listaEntranti");
     }
+
+    inJson() {
+        var st = "{\"id\":" + this.id + "}";
+        return st;
+    }
 }

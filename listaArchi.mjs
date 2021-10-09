@@ -3,7 +3,7 @@ export default class ListaArchi {
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        this.tipo = tipo; //3 tipi: listaArchiGrafo, listaUscenti, listaEntranti (potrei fare variabili globali per il tipo)
+        this.tipo = tipo; //3 tipi: listaArchiGrafo, listaUscenti, listaEntranti (potrei definire costanti globali per il tipo)
     }
 
     //inserisci in testa

@@ -13,4 +13,10 @@ export default class Arco {
         this.from = from;
         this.to = to;
     }
+
+    inJson() {
+        var st = "{\"from\":" + this.from.id + "," +
+            "\"to\":" + this.to.id + "}";
+        return st;
+    }
 };

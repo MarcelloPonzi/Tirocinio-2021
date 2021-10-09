@@ -1,3 +1,5 @@
 
 listaAdiacenze in Grafo, serve?
 json
+coerenza nel grafo json, esempio no archi verso nodi che non esistono
+salvataggio file (nel nostro file json in ouput non vogliamo i campi superflui come i riferimenti ad altri oggetti)
