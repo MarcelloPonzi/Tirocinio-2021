@@ -1,26 +1,20 @@
 import ListaArchi from './listaArchi.mjs';
 import ListaNodi from './listaNodi.mjs';
+import Nodo from './nodo.mjs';
 export default class Grafo {
     constructor() {
         this.nodi = new ListaNodi();
         this.archi = new ListaArchi("listaArchiGrafo");
         this.listaAdiacenze; //TODO
-        //variabile massimo id nodo
+        this.id_max = 1;
     }
 
-    aggiungiNodo(nuovoNodo) {
-        //controllo in tempo costante se il nodo è già inserito(probabilmente inutile se creo due nodi con lo stesso id)!!!!!! gestione id
-        if (this.nodi.dimensione == 0) {
-            this.nodi.inserisciTesta(nuovoNodo);
-        } else
-        if (this.nodi.dimensione == 1 && !(this.nodi.head == nuovoNodo)) {
-            this.nodi.inserisciCoda(nuovoNodo);
-        } else {
-            //se il nodo non ha prev e next non è già stato inserito
-            if (nuovoNodo.next == null && nuovoNodo.prev == null && this.nodi.dimensione > 1) {
-                this.nodi.inserisciCoda(nuovoNodo);
-            }
-        }
+    aggiungiNodo() {
+        var nuovoNodo = new Nodo(this.id_max);
+        this.nodi.inserisciCoda(nuovoNodo);
+        console.log("Nodo aggiunto con id " + this.id_max);
+        this.id_max++;
+        return nuovoNodo;
     }
 
     rimuoviNodo(nodo) {
@@ -35,13 +29,17 @@ export default class Grafo {
 
     aggiungiArco(arco) {
         //aggiunge arco alla lista degli archi del grafo
-        this.archi.inserisciTesta(arco, 'nextG', 'prevG');
+        this.archi.inserisciCoda(arco, 'nextG', 'prevG');
 
         //aggiunge arco alla lista degli archi uscenti dal nodo
-        arco.from.archiUscenti.inserisciTesta(arco, 'nextUscN', 'prevUscN');
+        arco.from.archiUscenti.inserisciCoda(arco, 'nextUscN', 'prevUscN');
 
         //aggiunge arco alla lista degli archi entranti nel nodo
-        arco.to.archiEntranti.inserisciTesta(arco, 'nextEntrN', 'prevEntrN');
+        arco.to.archiEntranti.inserisciCoda(arco, 'nextEntrN', 'prevEntrN');
+
+        //aggiunge arco alla lista degli archi adiacenti dei nodi
+        arco.from.archiAdiacenti.push(arco);
+        arco.to.archiAdiacenti.push(arco);
     }
 
     rimuoviArco(arco) {
@@ -53,6 +51,8 @@ export default class Grafo {
 
         //aggiunge arco alla lista degli archi entranti nel nodo
         arco.to.archiEntranti.rimuoviArco(arco, 'nextEntrN', 'prevEntrN');
+
+        //TODO RIMUOVERE ARCO DA LISTA ARCHI ADIACENTI
     }
 
     stampaArchi() {
@@ -62,16 +62,20 @@ export default class Grafo {
     }
 
     stampaArchiUscentiNodo(nodo) {
-        nodo.listaUscenti.stampaListaArchi('nextUscN');
-        nodo.listaUscenti.stampaListaStringa('nextUscN');
-        nodo.listaUscenti.stampaDimensione();
+        // nodo.archiUscenti.stampaListaArchi('nextUscN');
+        nodo.archiUscenti.stampaListaStringa('nextUscN');
+        nodo.archiUscenti.stampaDimensione();
 
     }
 
     stampaArchiEntrantiNodo(nodo) {
-        nodo.listaUscenti.stampaListaArchi('nextEntrN');
-        nodo.listaUscenti.stampaListaStringa('nextEntrN');
-        nodo.listaUscenti.stampaDimensione();
+        //nodo.archiEntranti.stampaListaArchi('nextEntrN');
+        nodo.archiEntranti.stampaListaStringa('nextEntrN');
+        nodo.archiEntranti.stampaDimensione();
+    }
+
+    stampaArchiAdiacentiNodo(nodo) {
+        nodo.stampaAdiacenti();
     }
 
     cancellaGrafo() {
@@ -79,7 +83,8 @@ export default class Grafo {
         let corrente = this.nodi.head;
         while (corrente) {
             corrente.archiUscenti.svuotaLista("nextUscN", "prevUscN");
-            corrente.archiEntranti.svuotaLista("nextEntrN", "nextEntrN");
+            corrente.archiEntranti.svuotaLista("nextEntrN", "prevEntrN");
+            corrente.archiAdiacenti.svuotaLista("nextAdiaN", "prevAdiaN");
             corrente = corrente.next;
         }
         //cancello i riferimenti ai nodi di ogni arco

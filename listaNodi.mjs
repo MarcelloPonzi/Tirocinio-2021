@@ -143,10 +143,11 @@ export default class ListaNodi {
             let corrente = this.head
             while (corrente) {
                 st += String(corrente.id);
-                st += " -> ";
-                corrente = corrente.next;
+                if (corrente.next) {
+                    st += " --> ";
+                    corrente = corrente.next;
+                } else corrente = corrente.next;
             }
-            st += "null";
             console.log(st);
         }
     }

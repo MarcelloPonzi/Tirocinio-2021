@@ -1,8 +1,15 @@
 1.Durante la conversione da json a oggetti, come faccio a passare il nodo giusto nel costruttore dell'arco? Risolto con complessità n^2, si può fare di meglio?
 
-2.
-Lista adiacenza per rappresentare le adiacenze?
-3.
-Controllare in tutto il codice differenza tra null e undifined
+2.Sembra esserci una proprietà transitiva:
+    se ho un arco tra 1 e 2 e ho un arco tra 2 e 3, allora l'arco (2,3) sarà presente nella lisa delle adiacenze del nodo 1.
+!!!il contenuto delle liste è corretto!!! come si intuiva dalle dimensioni!!!
+Possibile errore di stampa?
 
-
+Capito:
+-Il nodo 1 aggiunge alla lista di adiacenti l'arco (1,2) che avrà prev e next null
+-il nodo 2 aggiunge alla lista di adiacenti l'arco (1,2) che avrà prev e next null
+-il nodo 2 aggiunge alla lista di adiacenti l'arco (2,3) che avrà next null ma prev (1,2). Questo comporta che (1,2)
+avrà come next (2,3) e che nella lista del nodo 1 ora (1,2) avrà come next (2,3).
+Questo non accadeva con le altre liste perchè ogni arco era univoco (entrava in un solo nodo ed usciva da un solo nodo),
+ora invece è adiacente a due nodi che vanno in conflitto.
+Come risolvere?? Struttura dati differente? Ottengo la lista adiacenti come somma delle liste precedenti? potrei avere lo stesso problema.

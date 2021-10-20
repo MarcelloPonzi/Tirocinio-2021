@@ -5,8 +5,27 @@ export default class Nodo {
         this.id = id;
         this.prev = null;
         this.next = null;
-        this.archiUscenti = new ListaArchi("listaUscenti");
-        this.archiEntranti = new ListaArchi("listaEntranti");
+        this.archiUscenti = new ListaArchi("archiUscenti");
+        this.archiEntranti = new ListaArchi("archiEntranti");
+        this.archiAdiacenti = [];
+    }
+    stampaAdiacenti() {
+        let st = new String;
+        let i = 0;
+        this.archiAdiacenti.forEach(arco => {
+            st += "(";
+            st += String(arco.from.id);
+            st += ",";
+            st += String(arco.to.id);
+            st += ")";
+            if (i !== this.archiAdiacenti.length - 1) {
+                st += "-->";
+            }
+            i++;
+
+        })
+        console.log(st);
+        console.log("La dimensione è: " + i);
     }
 
     inJson() {

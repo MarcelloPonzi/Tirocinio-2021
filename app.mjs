@@ -8,8 +8,7 @@ import {
     writeFile
 } from "fs";
 
-testCreazioneOggetti();
-testCancellazioneOggetti();
+
 
 
 //lettura file json
@@ -25,7 +24,8 @@ const grafo = new Grafo();
 //funzione che converte una stringa json in un oggetto e lo aggiunge al grafo
 function jsonAGrafo(grafoDaCaricare) {
     grafoDaCaricare.nodi.forEach(nodo => {
-        grafo.aggiungiNodo(new Nodo(nodo.id));
+        grafo.aggiungiNodo();
+
     });
     grafoDaCaricare.archi.forEach(arco => {
         //per ogni arco cerco i nodi con l'id uguale al from e al to dell'oggetto json
@@ -44,6 +44,7 @@ function jsonAGrafo(grafoDaCaricare) {
         //non posso avere un arco tra nodi non esistenti)
         if (nodoFrom !== null && nodoTo !== null) {
             grafo.aggiungiArco(new Arco(nodoFrom, nodoTo));
+            console.log("Arco " + nodoFrom.id + " -> " + nodoTo.id + " aggiunto");
         }
     });
 }
@@ -79,14 +80,31 @@ function salvaJsonGrafo() {
     });
 }
 
-jsonAGrafo(grafoDaCaricare);
+function nuovoNodoUtente() {
+    grafo.aggiungiNodo(new Nodo(grafo.id_max));
+}
 
+function nuovoArcoUtente(nodoFrom, nodoTo) {
+    grafo.aggiungiArco(new Arco(nodoFrom, nodoTo));
+}
+
+//                             TEST                    
+console.log("\n -------------TEST---------------")
 console.log("Nodi da caricare:");
 console.log(grafoDaCaricare);
-console.log("Nodi caricati:");
-grafo.stampaNodi();
+jsonAGrafo(grafoDaCaricare);
 grafo.stampaArchi();
+grafo.stampaNodi();
+console.log("\n--------------------------------")
+let corrente = grafo.nodi.head;
+while (corrente) {
+    console.log("NODO: " + corrente.id);
+    //console.log(grafo.stampaArchiUscentiNodo(corrente));
+    //console.log(grafo.stampaArchiEntrantiNodo(corrente));
+    grafo.stampaArchiAdiacentiNodo(corrente);
+    corrente = corrente.next;
+}
+
 
 //Converto gli oggetti in file json
-
 salvaJsonGrafo();

@@ -3,7 +3,7 @@ export default class ListaArchi {
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        this.tipo = tipo; //3 tipi: listaArchiGrafo, listaUscenti, listaEntranti (potrei definire costanti globali per il tipo)
+        this.tipo = tipo; //3 tipi: listaArchiGrafo, archiUscenti, archiEntranti (potrei definire costanti globali per il tipo)
     }
 
     //inserisci in testa
@@ -21,7 +21,6 @@ export default class ListaArchi {
 
         }
         this.dimensione++;
-        return nuovoArco;
     }
 
     //inserisci In coda
@@ -42,8 +41,6 @@ export default class ListaArchi {
 
         }
         this.dimensione++;
-
-        return nuovoArco;
     }
 
     //rimuovi nodo con argomento nodo
@@ -61,7 +58,6 @@ export default class ListaArchi {
                 arcoDaRimuovere[prev] = null;
             }
             this.dimensione--;
-            return arcoDaRimuovere;
         }
     }
 
@@ -80,7 +76,6 @@ export default class ListaArchi {
                 arcoDaRimuovere[next] = null;
             }
             this.dimensione--;
-            return arcoDaRimuovere;
         }
     }
 
@@ -101,7 +96,6 @@ export default class ListaArchi {
                 arcoDaRimuovere[prev] = null;
             }
             this.dimensione--;
-            return arcoDaRimuovere;
         }
 
     }
@@ -120,8 +114,8 @@ export default class ListaArchi {
     //stampa lista
     stampaListaArchi(next) {
         if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
-        if (this.tipo == "listaArchiUscenti") console.log("\nLista archi uscenti dal nodo: ");
-        if (this.tipo == "listaArchientranti") console.log("\nLista archi uscenti dal nodo: ");
+        if (this.tipo == "archiUscenti") console.log("\nLista archi uscenti dal nodo: ");
+        if (this.tipo == "archiEntranti") console.log("\nLista archi entranti nel nodo: ");
 
         let corrente = this.head;
         while (corrente) {
@@ -138,26 +132,28 @@ export default class ListaArchi {
 
     stampaListaStringa(next) {
         if (!this.dimensione) {
-            if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
-            if (this.tipo == "listaArchiUscenti") console.log("\nLista archi uscenti dal nodo: ");
-            if (this.tipo == "listaArchientranti") console.log("\nLista archi uscenti dal nodo: ");
+            if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo vuota ");
+            if (this.tipo == "archiUscenti") console.log("\nLista archi uscenti dal nodo vuota ");
+            if (this.tipo == "archiEntranti") console.log("\nLista archi entranti nel nodo vuota ");
 
         } else {
             if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
-            if (this.tipo == "listaArchiUscenti") console.log("\nLista archi uscenti dal nodo: ");
-            if (this.tipo == "listaArchientranti") console.log("\nLista archi uscenti dal nodo: ");
+            if (this.tipo == "archiUscenti") console.log("\nLista archi uscenti dal nodo: ");
+            if (this.tipo == "archiEntranti") console.log("\nLista archi entranti nel nodo: ");
             let st = "";
-            let corrente = this.head
+            let corrente = this.head;
             while (corrente) {
                 st += "("
                 st += String(corrente.from.id)
                 st += ","
                 st += String(corrente.to.id);
                 st += ")"
-                st += " -> ";
-                corrente = corrente[next];
+                if (corrente[next]) {
+                    st += " --> ";
+                    corrente = corrente[next];
+                } else corrente = corrente[next];
+
             }
-            st += "null";
             console.log(st);
         }
     }

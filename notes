@@ -1,19 +1,7 @@
-1.  Ho sfruttato il loose type per usare una sola lista che gestisca le varie proprietà differenti dell'arco. Passo come parametro una stringa col nome della proprietà,
-    poi la funzione accede alla proprietà grazie alla stringa conservata in un parametro.
-    Potrei fare un'unica lista concatenata (le 3 degli archi + quella dei nodi), ma potrebbe darmi problemi nel debugging. Per il momento userò due liste, una per archi e l'altra per nodi.
+1.Scandisco i nodi e gli archi in modo che formino un array, in modo da ridurre la complessità nell'apprire un file json e creare gli oggetti
 
-    2.tipo della lista, workaround? Per esempio potrei usare costanti global
-
-    3.nuova struttura in
-
-    4.Scandisco i nodi e gli archi in modo che formino un array
-
-    gli id devono essere gestiti internamente, non dall'utente
-
-    variabile massimo id creato
-
-potrei usare il parametro id come opzionalre, quado è l'utente a creare usa l'id max attuale
-
-aggiungiamo una lista al nodo di tutti gli archi entranti e uscenti (somma delle due liste). Questo perchè dovremo ordinare gli archi (cambiando il verso) per averne max 3 uscenti.
+aggiungiamo una lista al nodo di tutti gli archi entranti e uscenti (somma delle due liste). Questo perchè dovremo ordinare gli archi (cambiando il verso) per averne max 3 uscenti. (da testare)
 
 aggiungere patrigna su github
+
+funzione ceck che percorre tutte le liste e controlla la coerenza.
