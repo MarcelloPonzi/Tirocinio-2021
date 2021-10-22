@@ -3,6 +3,7 @@ import ListaArchi from "./listaArchi.mjs";
 export default class Nodo {
     constructor(id) {
         this.id = id;
+        this.grado = null;
         this.prev = null;
         this.next = null;
         this.archiUscenti = new ListaArchi("archiUscenti");
@@ -10,6 +11,7 @@ export default class Nodo {
         this.archiAdiacenti = [];
     }
     stampaAdiacenti() {
+        console.log("Lista archi adiacenti al nodo: ")
         let st = new String;
         let i = 0;
         this.archiAdiacenti.forEach(arco => {

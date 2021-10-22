@@ -5,3 +5,8 @@ aggiungiamo una lista al nodo di tutti gli archi entranti e uscenti (somma delle
 aggiungere patrigna su github
 
 funzione ceck che percorre tutte le liste e controlla la coerenza.
+
+2. Rifare la struttura dati in modo da aver un list item (con relativi next e prev) e che puntano all'oggetto arco.
+3. Decidere MAX_GRADO calcolando
+4.
+5. Finito questo algoritmo riesco a conoscere il core number, e successivamente, dopo aver orientato gli archi possiamo sapere in tempo costante per sapere se esiste un cammino tra due nodi.

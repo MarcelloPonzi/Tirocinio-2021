@@ -6,7 +6,8 @@ export default class Grafo {
         this.nodi = new ListaNodi();
         this.archi = new ListaArchi("listaArchiGrafo");
         this.listaAdiacenze; //TODO
-        this.id_max = 1;
+        this.id_max = 0;
+        this.max_grado = 0;
     }
 
     aggiungiNodo() {

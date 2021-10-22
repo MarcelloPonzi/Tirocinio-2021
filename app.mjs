@@ -1,5 +1,6 @@
 import testCancellazioneOggetti from "./Test/testCancellazioneOggetti.mjs";
 import testCreazioneOggetti from "./Test/testCreazioneOggetti.mjs";
+import calcolatoreKCore from "./batagelj.mjs";
 import Grafo from "./grafo.mjs";
 import Nodo from "./nodo.mjs";
 import Arco from "./arco.mjs";
@@ -99,12 +100,12 @@ console.log("\n--------------------------------")
 let corrente = grafo.nodi.head;
 while (corrente) {
     console.log("NODO: " + corrente.id);
-    //console.log(grafo.stampaArchiUscentiNodo(corrente));
-    //console.log(grafo.stampaArchiEntrantiNodo(corrente));
+    grafo.stampaArchiUscentiNodo(corrente);
+    grafo.stampaArchiEntrantiNodo(corrente);
     grafo.stampaArchiAdiacentiNodo(corrente);
     corrente = corrente.next;
 }
-
-
+console.log("\nCalcolo K core dei nodi")
+calcolatoreKCore(grafo);
 //Converto gli oggetti in file json
 salvaJsonGrafo();
