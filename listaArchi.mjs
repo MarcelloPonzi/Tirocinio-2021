@@ -1,127 +1,121 @@
+import listItem from "./listItem.mjs";
+
 export default class ListaArchi {
     constructor(tipo) {
         this.head = null;
         this.tail = null;
         this.dimensione = 0;
-        this.tipo = tipo; //3 tipi: listaArchiGrafo, archiUscenti, archiEntranti (potrei definire costanti globali per il tipo)
+        this.tipo = tipo;
     }
 
     //inserisci in testa
-    inserisciTesta(nuovoArco, next, prev) {
-
+    inserisciTesta(arco, pos) {
+        let item = new listItem(arco);
+        arco[pos] = item;
         //se la lista è vuota
         if (!this.dimensione) {
-            this.head = nuovoArco;
-            this.tail = nuovoArco;
+            this.head = item;
+            this.tail = item;
         } else {
-
-            this.head[prev] = nuovoArco;
-            nuovoArco[next] = this.head;
-            this.head = nuovoArco;
-
+            this.head.prev = item;
+            item.next = this.head;
+            this.head = item;
         }
         this.dimensione++;
     }
 
     //inserisci In coda
-    inserisciCoda(nuovoArco, next, prev) {
-
-
-
+    inserisciCoda(arco, pos) {
+        let item = new listItem(arco);
+        arco[pos] = item;
         //se vuoto, allora aggiungi in testa
         if (!this.dimensione) {
-            this.head = nuovoArco;
-            this.tail = nuovoArco;
+            this.head = item;
+            this.tail = item;
         } else {
-            this.tail[next] = nuovoArco;
-            nuovoArco[prev] = this.tail;
-            this.tail = nuovoArco;
-
-
-
+            this.tail.next = item;
+            item.prev = this.tail;
+            this.tail = item;
         }
         this.dimensione++;
     }
 
-    //rimuovi nodo con argomento nodo
-    rimuoviNodo(arcoDaRimuovere, next, prev) {
+    //rimuovi arco
+    rimuoviArco(arco, pos) {
         if (!this.dimensione) {
             return null;
         } else {
+            let item = arco[pos];
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
             } else {
-                arcoDaRimuovere[prev][next] = arcoDaRimuovere[next];
-                arcoDaRimuovere[next][prev] = arcoDaRimuovere[prev];
-                arcoDaRimuovere[next] = null;
-                arcoDaRimuovere[prev] = null;
+                item.prev.next = item.next;
+                item.next.prev = item.prev;
             }
+            //rimuovo riferimenti dell'item
+            item.next = null;
+            item.prev = null;
+            item.obj = null;
+            //rimuovo riferimenti arco
+            arco[pos] = null;
             this.dimensione--;
         }
     }
 
     //rimuovi testa
-    rimuoviTesta(next, prev) {
+    rimuoviTesta(pos) {
         if (!this.dimensione) {
             return null;
         } else {
-            let arcoDaRimuovere = this.head;
+            let item = this.head;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
             } else {
-                this.head = arcoDaRimuovere[next];
-                this.head[prev] = null;
-                arcoDaRimuovere[next] = null;
+                this.head = item.next;
+                this.head.prev = null;
             }
+            //rimuovo riferimenti arco
+            item.obj[pos] = null;
+            //rimuovo riferimenti dell'item
+            item.next = null;
+            item.prev = null;
+            item.obj = null;
             this.dimensione--;
         }
     }
 
 
     //rimuovi coda
-    rimuoviCoda(next, prev) {
+    rimuoviCoda(pos) {
         //se vuota non puoi cancellare
         if (!this.dimensione) {
             return null;
         } else {
-            let arcoDaRimuovere = this.tail;
+            let item = this.tail;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
             } else {
-                this.tail = arcoDaRimuovere[prev];
-                this.tail[next] = null;
-                arcoDaRimuovere[prev] = null;
+                this.tail = item.prev;
+                this.tail.next = null;
             }
+            //rimuovo riferimenti arco
+            item.obj[pos] = null;
+            //rimuovo riferimenti dell'item
+            item.next = null;
+            item.prev = null;
+            item.obj = null;
             this.dimensione--;
         }
-
     }
 
 
     //Svuota lista
-    svuotaLista(next, prev) {
+    svuotaLista(pos) {
         while (this.head) {
-            this.rimuoviTesta(next, prev);
-        }
-        this.head = null;
-        this.tail = null;
-        this.dimensione = 0;
-
-    }
-    //stampa lista
-    stampaListaArchi(next) {
-        if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
-        if (this.tipo == "archiUscenti") console.log("\nLista archi uscenti dal nodo: ");
-        if (this.tipo == "archiEntranti") console.log("\nLista archi entranti nel nodo: ");
-
-        let corrente = this.head;
-        while (corrente) {
-            console.log(corrente);
-            corrente = corrente[next];
-
+            this.rimuoviTesta(pos);
         }
     }
     //stampa dimensione
@@ -130,32 +124,68 @@ export default class ListaArchi {
         console.log(this.dimensione);
     }
 
-    stampaListaStringa(next) {
+    stampaListaStringa() {
         if (!this.dimensione) {
-            if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo vuota ");
-            if (this.tipo == "archiUscenti") console.log("\nLista archi uscenti dal nodo vuota ");
-            if (this.tipo == "archiEntranti") console.log("\nLista archi entranti nel nodo vuota ");
-
-        } else {
-            if (this.tipo == "listaArchiGrafo") console.log("\nLista archi nel grafo: ");
-            if (this.tipo == "archiUscenti") console.log("\nLista archi uscenti dal nodo: ");
-            if (this.tipo == "archiEntranti") console.log("\nLista archi entranti nel nodo: ");
-            let st = "";
-            let corrente = this.head;
-            while (corrente) {
-                st += "("
-                st += String(corrente.from.id)
-                st += ","
-                st += String(corrente.to.id);
-                st += ")"
-                if (corrente[next]) {
-                    st += " --> ";
-                    corrente = corrente[next];
-                } else corrente = corrente[next];
+            switch (this.tipo) {
+                case 'archiGrafo': {
+                    console.log("\nLista archi nel grafo vuota ");
+                    break;
+                }
+                case 'archiUscenti': {
+                    console.log("\nLista archi uscenti dal nodo vuota ");
+                    break;
+                }
+                case 'archiEntranti': {
+                    console.log("\nLista archi entranti nel nodo vuota ");
+                    break;
+                }
+                case 'archiAdiacenti': {
+                    console.log("\nLista archi adiacenti del nodo vuota ");
+                    break;
+                }
+                default: {
+                    console.log("\nTipo lista non specificato");
+                    break;
+                }
 
             }
-            console.log(st);
+        } else switch (this.tipo) {
+            case 'archiGrafo': {
+                console.log("\nLista archi nel grafo: ");
+                break;
+            }
+            case 'archiUscenti': {
+                console.log("\nLista archi uscenti dal nodo: ");
+                break;
+            }
+            case 'archiEntranti': {
+                console.log("\nLista archi entranti nel nodo: ");
+                break;
+            }
+            case 'archiAdiacenti': {
+                console.log("\nLista archi adiacenti del nodo: ");
+                break;
+            }
+            default: {
+                console.log("\nTipo lista non specificato");
+                break;
+            }
         }
-    }
 
+        let st = "";
+        let item = this.head;
+        while (item) {
+            st += "("
+            st += String(item.obj.from.id)
+            st += ","
+            st += String(item.obj.to.id);
+            st += ")"
+            if (item.next) {
+                st += " --> ";
+                item = item.next;
+            } else item = item.next;
+
+        }
+        console.log(st);
+    }
 }

@@ -4,11 +4,10 @@ export default class Nodo {
     constructor(id) {
         this.id = id;
         this.grado = null;
-        this.prev = null;
-        this.next = null;
+        this.pos = null;
         this.archiUscenti = new ListaArchi("archiUscenti");
         this.archiEntranti = new ListaArchi("archiEntranti");
-        this.archiAdiacenti = [];
+        this.archiAdiacenti = new ListaArchi("archiAdiacenti");
     }
     stampaAdiacenti() {
         console.log("Lista archi adiacenti al nodo: ")

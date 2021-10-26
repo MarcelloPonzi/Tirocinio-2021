@@ -32,44 +32,43 @@ function jsonAGrafo(grafoDaCaricare) {
         //per ogni arco cerco i nodi con l'id uguale al from e al to dell'oggetto json
         let nodoFrom = null; //riferimento a nodo from cercato
         let nodoTo = null; //riferimento a nodo to cercato
-        let corrente = grafo.nodi.head;
-        while (corrente) {
+        let item = grafo.nodi.head;
+        while (item) {
             //COERENZA GRAFO
 
-            if (arco.from == corrente.id) nodoFrom = corrente;
-            if (arco.to == corrente.id) nodoTo = corrente;
-            corrente = corrente.next;
+            if (arco.from == item.obj.id) nodoFrom = item.obj;
+            if (arco.to == item.obj.id) nodoTo = item.obj;
+            item = item.next;
         }
         //trovati i nodi corretti e ottenuti i riferimenti a questi, aggiungo l'arco
         //se e solo se possiede entrambi i riferimenti ai nodi (Coerenza del grafo, 
         //non posso avere un arco tra nodi non esistenti)
         if (nodoFrom !== null && nodoTo !== null) {
-            grafo.aggiungiArco(new Arco(nodoFrom, nodoTo));
-            console.log("Arco " + nodoFrom.id + " -> " + nodoTo.id + " aggiunto");
+            grafo.aggiungiArco(nodoFrom, nodoTo);
         }
     });
 }
 
 function salvaJsonGrafo() {
     //converto i nodi
-    let corrente = grafo.nodi.head;
+    let item = grafo.nodi.head;
     var json = "{\"nodi\":[";
-    while (corrente) {
-        json = json + corrente.inJson();
-        if (corrente.next !== null) { //PROBLEMA: QUA FUNZIONA CORRETTAMENTE E PUNTA A NULL
+    while (item) {
+        json = json + item.obj.inJson();
+        if (item.next !== null) { //PROBLEMA: QUA FUNZIONA CORRETTAMENTE E PUNTA A NULL
             json = json + ",";
         }
-        corrente = corrente.next;
+        item = item.next;
     }
     //converto gli archi
     json = json + "],\"archi\":[";
-    corrente = grafo.archi.head;
-    while (corrente) {
-        json = json + corrente.inJson();
-        if (corrente.nextG !== undefined) { //PROBLEMA: QUA NON FUNZIONA CORRETTAMENTE SE PUNTA A NULL, L'ULTIMO DELLA LISTA PUNTA A UNDEFINED
+    item = grafo.archi.head;
+    while (item) {
+        json = json + item.obj.inJson();
+        if (item.next !== undefined) { //PROBLEMA: QUA NON FUNZIONA CORRETTAMENTE SE PUNTA A NULL, L'ULTIMO DELLA LISTA PUNTA A UNDEFINED
             json = json + ",";
         }
-        corrente = corrente.nextG;
+        item = item.next;
     }
     json = json + "]}";
 
@@ -82,11 +81,11 @@ function salvaJsonGrafo() {
 }
 
 function nuovoNodoUtente() {
-    grafo.aggiungiNodo(new Nodo(grafo.id_max));
+    grafo.aggiungiNodo(new Nodo(grafo.max_id_nodi));
 }
 
 function nuovoArcoUtente(nodoFrom, nodoTo) {
-    grafo.aggiungiArco(new Arco(nodoFrom, nodoTo));
+    grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
 }
 
 //                             TEST                    
@@ -94,18 +93,21 @@ console.log("\n -------------TEST---------------")
 console.log("Nodi da caricare:");
 console.log(grafoDaCaricare);
 jsonAGrafo(grafoDaCaricare);
-grafo.stampaArchi();
 grafo.stampaNodi();
+grafo.stampaArchi();
 console.log("\n--------------------------------")
-let corrente = grafo.nodi.head;
-while (corrente) {
-    console.log("NODO: " + corrente.id);
-    grafo.stampaArchiUscentiNodo(corrente);
-    grafo.stampaArchiEntrantiNodo(corrente);
-    grafo.stampaArchiAdiacentiNodo(corrente);
-    corrente = corrente.next;
+let item = grafo.nodi.head;
+while (item) {
+    console.log("NODO: " + item.obj.id);
+    grafo.stampaArchiUscentiNodo(item.obj);
+    grafo.stampaArchiEntrantiNodo(item.obj);
+    grafo.stampaArchiAdiacentiNodo(item.obj);
+    item = item.next;
 }
+grafo.calcolatoreMaxGrado();
+console.log("Il grado massimo è " + grafo.max_grado);
 console.log("\nCalcolo K core dei nodi")
 calcolatoreKCore(grafo);
+
 //Converto gli oggetti in file json
 salvaJsonGrafo();

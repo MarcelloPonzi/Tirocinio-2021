@@ -1,5 +1,6 @@
-
-listaAdiacenze in Grafo, serve?
-json
-coerenza nel grafo json, esempio no archi verso nodi che non esistono
-salvataggio file (nel nostro file json in ouput non vogliamo i campi superflui come i riferimenti ad altri oggetti)
+V2. Rifare la struttura dati in modo da aver un list item (con relativi next e prev) e che puntano all'oggetto arco. (definire due liste archi diverse???)
+2.1 Funzione di testing ceck che controlla la coerenza del grafo.
+{parametri di corretteza: giusta quantità di elementi, giuste liste, ogni arco ha i riferimenti a due nodi, nodi e archi vengono correttamente eliminati}
+3. Decidere MAX_GRADO calcolando la lista col grado più grande (aggiornare il max grado ad ogni aggiunta di un arco? così ho la dimensione max in tempo costante
+4. finire algoritmo di batagelj
+ 

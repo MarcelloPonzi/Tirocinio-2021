@@ -1,3 +1,5 @@
+import listItem from "./listItem.mjs";
+
 export default class ListaNodi {
     constructor() {
         this.head = null;
@@ -6,62 +8,61 @@ export default class ListaNodi {
     }
 
     //inserisci in testa
-    inserisciTesta(nuovoNodo) {
-
-
+    inserisciTesta(nodo) {
+        let item = new listItem(nodo);
+        nodo.pos = item;
         //se la lista è vuota
         if (!this.dimensione) {
-            this.head = nuovoNodo;
-            this.tail = nuovoNodo;
+            this.head = item;
+            this.tail = item;
         } else {
 
-            this.head.prev = nuovoNodo;
-            nuovoNodo.next = this.head;
-            this.head = nuovoNodo;
-
+            this.head.prev = item;
+            item.next = this.head;
+            this.head = item;
         }
         this.dimensione++;
-        return nuovoNodo;
     }
 
     //inserisci In coda
-    inserisciCoda(nuovoNodo) {
-
-
+    inserisciCoda(nodo) {
+        let item = new listItem(nodo);
+        nodo.pos = item;
 
         //se vuoto, allora aggiungi in testa
         if (!this.dimensione) {
-            this.head = nuovoNodo;
-            this.tail = nuovoNodo;
+            this.head = item;
+            this.tail = item;
         } else {
-            this.tail.next = nuovoNodo;
-            nuovoNodo.prev = this.tail;
-            this.tail = nuovoNodo;
-
-
-
+            this.tail.next = item;
+            item.prev = this.tail;
+            this.tail = item;
         }
         this.dimensione++;
-
-        return nuovoNodo;
     }
 
-    //rimuovi nodo con argomento nodo
-    rimuoviNodo(nodoDaRimuovere) {
+    //rimuovi oggetto nodo
+    rimuoviNodo(nodo) {
         if (!this.dimensione) {
             return null;
         } else {
+            let item = nodo.pos;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
             } else {
-                nodoDaRimuovere.prev.next = nodoDaRimuovere.next;
-                nodoDaRimuovere.next.prev = nodoDaRimuovere.prev;
-                nodoDaRimuovere.next = null;
-                nodoDaRimuovere.prev = null;
+                item.prev.next = item.next;
+                item.next.prev = item.prev;
             }
+            //elimino riferimenti di list item
+            item.prev = null;
+            item.next = null;
+            item.obj = null;
+            //elimino i riferimenti dell'oggetto nodo
+            nodo.pos = null;
+
+
             this.dimensione--;
-            return nodoDaRimuovere;
         }
     }
 
@@ -70,17 +71,22 @@ export default class ListaNodi {
         if (!this.dimensione) {
             return null;
         } else {
-            let nodoDaRimuovere = this.head;
+            let item = this.head;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
             } else {
-                this.head = nodoDaRimuovere.next;
+                this.head = item.next;
                 this.head.prev = null;
-                nodoDaRimuovere.next = null;
+
             }
+            //elimino riferimento del nodo
+            item.obj.pos = null;
+            //elimino riferimenti item
+            item.next = null;
+            item.prev = null;
+            item.obj = null;
             this.dimensione--;
-            return nodoDaRimuovere;
         }
     }
 
@@ -91,17 +97,21 @@ export default class ListaNodi {
         if (!this.dimensione) {
             return null;
         } else {
-            let nodoDaRimuovere = this.tail;
+            let item = this.tail;
             if (this.dimensione === 1) {
                 this.head = null;
                 this.tail = null;
             } else {
-                this.tail = nodoDaRimuovere.prev;
+                this.tail = item.prev;
                 this.tail.next = null;
-                nodoDaRimuovere.prev = null;
             }
+            //elimino riferimento del nodo
+            item.obj.pos = null;
+            //elimino riferimenti item
+            item.next = null;
+            item.prev = null;
+            item.obj = null;
             this.dimensione--;
-            return nodoDaRimuovere;
         }
 
     }
@@ -112,18 +122,14 @@ export default class ListaNodi {
         while (this.head) {
             this.rimuoviTesta();
         }
-        this.head = null;
-        this.tail = null;
-        this.dimensione = 0;
-
     }
     //stampa lista
     stampaListaNodi() {
         console.log("\nLista nodi: ")
-        let corrente = this.head;
-        while (corrente) {
-            console.log(corrente);
-            corrente = corrente.next;
+        let item = this.head;
+        while (item) {
+            console.log(item.obj);
+            item = item.next;
 
         }
     }
@@ -140,13 +146,13 @@ export default class ListaNodi {
         } else {
             console.log("\nLista nodi: ")
             let st = "";
-            let corrente = this.head
-            while (corrente) {
-                st += String(corrente.id);
-                if (corrente.next) {
+            let item = this.head
+            while (item) {
+                st += String(item.obj.id);
+                if (item.next) {
                     st += " --> ";
-                    corrente = corrente.next;
-                } else corrente = corrente.next;
+                    item = item.next;
+                } else item = item.next;
             }
             console.log(st);
         }
