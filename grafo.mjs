@@ -9,6 +9,7 @@ export default class Grafo {
         this.max_id_nodi = 0;
         this.max_id_archi = 0;
         this.max_grado = 0;
+        this.adiacenze = [];
     }
     calcolatoreMaxGrado() {
         let item = this.nodi.head;
@@ -119,5 +120,14 @@ export default class Grafo {
 
     }
 
+    creaAdiacenze() {
+        this.adiacenze.length = this.nodi.dimensione;
+        let n = this.nodi.head;
+        while (n) {
+            this.adiacenze[n.obj.id] = n.obj.archiAdiacenti;
+            n = n.next;
+        }
+        return this.adiacenze;
+    }
 
 }

@@ -1,4 +1,5 @@
 import ListaArchi from "./listaArchi.mjs";
+import ListaNodi from "./listaNodi.mjs";
 
 export default class Nodo {
     constructor(id) {
@@ -8,25 +9,6 @@ export default class Nodo {
         this.archiUscenti = new ListaArchi("archiUscenti");
         this.archiEntranti = new ListaArchi("archiEntranti");
         this.archiAdiacenti = new ListaArchi("archiAdiacenti");
-    }
-    stampaAdiacenti() {
-        console.log("Lista archi adiacenti al nodo: ")
-        let st = new String;
-        let i = 0;
-        this.archiAdiacenti.forEach(arco => {
-            st += "(";
-            st += String(arco.from.id);
-            st += ",";
-            st += String(arco.to.id);
-            st += ")";
-            if (i !== this.archiAdiacenti.length - 1) {
-                st += "-->";
-            }
-            i++;
-
-        })
-        console.log(st);
-        console.log("La dimensione è: " + i);
     }
 
     inJson() {

@@ -1,25 +1,11 @@
-import testCancellazioneOggetti from "./Test/testCancellazioneOggetti.mjs";
-import testCreazioneOggetti from "./Test/testCreazioneOggetti.mjs";
-import calcolatoreKCore from "./batagelj.mjs";
 import Grafo from "./grafo.mjs";
 import Nodo from "./nodo.mjs";
 import Arco from "./arco.mjs";
+import calcolatoreKCore from "./batagelj.mjs";
 import {
     readFileSync,
     writeFile
 } from "fs";
-
-
-
-
-//lettura file json
-const jsonString = readFileSync("./nodi_e_archi_salvati.json");
-//creazione array di oggetti da json
-const grafoDaCaricare = JSON.parse(jsonString);
-
-//crezione grafo
-const grafo = new Grafo();
-
 
 
 //funzione che converte una stringa json in un oggetto e lo aggiunge al grafo
@@ -49,13 +35,13 @@ function jsonAGrafo(grafoDaCaricare) {
     });
 }
 
-function salvaJsonGrafo() {
+function salvaJsonGrafo(grafo) {
     //converto i nodi
     let item = grafo.nodi.head;
     var json = "{\"nodi\":[";
     while (item) {
         json = json + item.obj.inJson();
-        if (item.next !== null) { //PROBLEMA: QUA FUNZIONA CORRETTAMENTE E PUNTA A NULL
+        if (item.next !== null) {
             json = json + ",";
         }
         item = item.next;
@@ -65,7 +51,7 @@ function salvaJsonGrafo() {
     item = grafo.archi.head;
     while (item) {
         json = json + item.obj.inJson();
-        if (item.next !== undefined) { //PROBLEMA: QUA NON FUNZIONA CORRETTAMENTE SE PUNTA A NULL, L'ULTIMO DELLA LISTA PUNTA A UNDEFINED
+        if (item.next !== undefined) {
             json = json + ",";
         }
         item = item.next;
@@ -80,34 +66,56 @@ function salvaJsonGrafo() {
     });
 }
 
-function nuovoNodoUtente() {
+function nuovoNodoUtente(grafo) {
     grafo.aggiungiNodo(new Nodo(grafo.max_id_nodi));
 }
 
-function nuovoArcoUtente(nodoFrom, nodoTo) {
+function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
     grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
 }
 
-//                             TEST                    
+
+//test lettura del file nodiArchi.json corretta
+function testLetturaCorretta() {
+    console.log("\n -------------TEST LETTURA CORRETTA---------------")
+    let passato = 1;
+    //lettura file json
+    const jsonString = readFileSync("./nodiArchi.json");
+    //creazione array di oggetti da json
+    const grafoDaCaricare = JSON.parse(jsonString);
+    //crezione grafo
+    const grafo = new Grafo();
+    console.log(grafoDaCaricare);
+    jsonAGrafo(grafoDaCaricare);
+    if (grafo.nodi.dimensione !== 9) passato = 0;
+    if (grafo.archi.dimensione !== 16) passato = 0;
+}
+//Test Cancellazione corretta
+//Test per scrittura corretta
+
 console.log("\n -------------TEST---------------")
-console.log("Nodi da caricare:");
-console.log(grafoDaCaricare);
+//lettura file json
+const jsonString = readFileSync("./nodiArchi.json");
+//creazione array di oggetti da json
+const grafoDaCaricare = JSON.parse(jsonString);
+//console.log("Nodi da caricare:");
+//console.log(grafoDaCaricare);
+//crezione grafo
+const grafo = new Grafo();
+//console.log(grafoDaCaricare);
 jsonAGrafo(grafoDaCaricare);
-grafo.stampaNodi();
-grafo.stampaArchi();
+//grafo.stampaNodi();
+//grafo.stampaArchi();
 console.log("\n--------------------------------")
 let item = grafo.nodi.head;
-while (item) {
-    console.log("NODO: " + item.obj.id);
-    grafo.stampaArchiUscentiNodo(item.obj);
-    grafo.stampaArchiEntrantiNodo(item.obj);
-    grafo.stampaArchiAdiacentiNodo(item.obj);
-    item = item.next;
-}
-grafo.calcolatoreMaxGrado();
-console.log("Il grado massimo è " + grafo.max_grado);
+// while (item) {
+//     console.log("NODO: " + item.obj.id);
+//     grafo.stampaArchiUscentiNodo(item.obj);
+//     grafo.stampaArchiEntrantiNodo(item.obj);
+//     grafo.stampaArchiAdiacentiNodo(item.obj);
+//     item = item.next;
+// }
 console.log("\nCalcolo K core dei nodi")
-calcolatoreKCore(grafo);
-
-//Converto gli oggetti in file json
-salvaJsonGrafo();
+let core = calcolatoreKCore(grafo);
+console.log("Core number dei nodi: ")
+console.log(core);

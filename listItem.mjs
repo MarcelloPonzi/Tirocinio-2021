@@ -1,5 +1,5 @@
 export default class listItem {
-    constructor(obj, pos) {
+    constructor(obj) {
         this.prev = null;
         this.next = null;
         this.obj = obj;
