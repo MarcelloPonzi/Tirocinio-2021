@@ -10,14 +10,12 @@ export default function calcolatoreKCore(grafo) {
     var deg = new Array(grafo.nodi.dimensione - 1);
     while (item) {
         let nodo = item.obj
-        nodo.grado = nodo.archiAdiacenti.dimensione;
-        deg[nodo.id] = nodo.grado; //!!!!
+        deg[nodo.id] = nodo.archiAdiacenti.dimensione;
         item = item.next
     }
 
     //STEP 2 inizializza bin con il numero di elementi che hanno quel grado
     item = grafo.nodi.head;
-    grafo.calcolatoreMaxGrado();
     var bin = new Array(grafo.max_grado + 1).fill(0);
     for (let i = 0; i <= deg.length - 1; i++) {
         bin[deg[i]]++;

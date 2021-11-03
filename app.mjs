@@ -95,17 +95,17 @@ function testLetturaCorretta() {
 
 console.log("\n -------------TEST---------------")
 //lettura file json
-const jsonString = readFileSync("./nodiArchi.json");
+const jsonString = readFileSync("./nodiArchiTest.json");
 //creazione array di oggetti da json
 const grafoDaCaricare = JSON.parse(jsonString);
-//console.log("Nodi da caricare:");
-//console.log(grafoDaCaricare);
+console.log("Nodi da caricare:");
+console.log(grafoDaCaricare);
 //crezione grafo
 const grafo = new Grafo();
-//console.log(grafoDaCaricare);
+// console.log(grafoDaCaricare);
 jsonAGrafo(grafoDaCaricare);
-//grafo.stampaNodi();
-//grafo.stampaArchi();
+// grafo.stampaNodi();
+// grafo.stampaArchi();
 console.log("\n--------------------------------")
 let item = grafo.nodi.head;
 // while (item) {
