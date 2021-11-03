@@ -1,10 +1,8 @@
 1.Scandisco i nodi e gli archi in modo che formino un array, in modo da ridurre la complessità nell'apprire un file json e creare gli oggetti
 
-aggiungere patrigna su github
-
 5. Finito questo algoritmo riesco a conoscere il core number, e successivamente,
 dopo aver Riorientato gli archi possiamo sapere in tempo costante per sapere se esiste un cammino tra due nodi.
-Quando cancello un nodo, prendo tutti gli archi e li oriento per essere uscenti e li metto entranti per il nodo vicino a quello cancellato
+Quando cancello un nodo riordino iterando sull'array sort, prendo tutti gli archi e li oriento per essere uscenti e li metto entranti per il nodo vicino a quello appena cancellato
 
 2.controllo dell'assegnazione degli id (caso rimozione e aggiunta)
 Array sort mi dice l'ordine di cancellazione e mi permette di ricostruire con gli archi uscenti partendo dai primi cancellati (quelli più esterni)
