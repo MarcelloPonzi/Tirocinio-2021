@@ -1,12 +1,26 @@
 export default function calcolatoreKCore(grafo) {
     grafo.calcolatoreMaxGrado();
     console.log("Il grado massimo è " + grafo.max_grado);
-    //funzione che controlla gli id siano uniformi e si sosseguano senza "salti"
-    //TODO
-    //creo array di adiacenze
-    var adiacenze = grafo.creaAdiacenze();
-    //STEP 1 misurazione grado dei nodi attraverso lunghezza lista adiacenze
+    //codice che controlla gli id siano uniformi e si sosseguano senza "salti"(condizione necessaria)
+    //e in caso non lo siano li aggiusta
     let item = grafo.nodi.head;
+    var idNodi = new Array(grafo.max_id_nodi).fill(0);
+    while (item) {
+        idNodi[item.obj.id] = item.obj;
+        item = item.next;
+    }
+    let m = 0; //mancanti
+    idNodi.forEach(nodo => {
+
+        if (nodo == 0) {
+            m++;
+        } else {
+            nodo.id = nodo.id - m;
+        }
+    })
+
+    //STEP 1 misurazione grado dei nodi attraverso lunghezza lista adiacenze
+    item = grafo.nodi.head;
     var deg = new Array(grafo.nodi.dimensione - 1);
     while (item) {
         let nodo = item.obj
@@ -59,21 +73,32 @@ export default function calcolatoreKCore(grafo) {
     }
     console.log("Pos: ");
     console.log(pos);
+    console.log("Sort: ");
+    console.log(sort);
 
     //STEP 3
-    //n è nodo del grafo
+    //creo un array di nodi
+    var arrayNodi = grafo.creaArrayNodi();
+    //svuoto le liste entranti ed uscenti di ogni nodo
+    arrayNodi.forEach(nodo => {
+        nodo.archiUscenti.svuotaLista("uscPos");
+        nodo.archiEntranti.svuotaLista("entrPos");
+    });
     for (let i = 0; i < sort.length - 1; i++) {
+        //n è oggetto nodo del grafo
+        let n = arrayNodi[sort[i]];
+
         //a è arco adiacente al nodo n
-        let a = adiacenze[sort[i]].head;
+        let a = n.archiAdiacenti.head;
         //u è oggetto nodo adiacente
         let u;
         while (a) {
-            if (a.obj.from.id == sort[i]) {
+            if (a.obj.from.id == n.id) {
                 u = a.obj.to
             } else {
                 u = a.obj.from
             };
-            if (deg[u.id] > deg[sort[i]]) {
+            if (deg[u.id] > deg[n.id]) {
                 deg[u.id] = deg[u.id] - 1;
                 //riordina i nodi di G come nelle slides
                 let temp = pos[sort[bin[deg[u.id] + 1]]]
@@ -83,10 +108,19 @@ export default function calcolatoreKCore(grafo) {
                 sort[pos[u.i]] = sort[pos[temp]];
                 sort[pos[temp]] = temp;
                 bin[deg[u.id] + 1] + 1;
-                //passo al prossimo u adiacente a n
+                //modifico l'arco e lo aggiungo ad entranti ed uscenti
+                //from è il nodo che sto eliminando, in modo da avere l'arco orientato uscendo
+                a.obj.from = n;
+                a.obj.to = u;
+                n.archiUscenti.inserisciCoda(a.obj, 'uscPos');
+                u.archiEntranti.inserisciCoda(a.obj, 'entrPos');
             }
+            //passo al prossimo u adiacente a n
             a = a.next;
         }
+        //cancello array nodi (struttura che non voglio sia usata al di fuori di abtajeli)
+
     }
+    arrayNodi = null;
     return deg;
 }

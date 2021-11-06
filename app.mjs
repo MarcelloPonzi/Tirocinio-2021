@@ -51,7 +51,7 @@ function salvaJsonGrafo(grafo) {
     item = grafo.archi.head;
     while (item) {
         json = json + item.obj.inJson();
-        if (item.next !== undefined) {
+        if (item.next !== null) {
             json = json + ",";
         }
         item = item.next;
@@ -59,7 +59,7 @@ function salvaJsonGrafo(grafo) {
     json = json + "]}";
 
     //salvo in nuovo file
-    writeFile("testJson.json", json, function (err) {
+    writeFile("salvato.json", json, function (err) {
         if (err) {
             console.log(err);
         }
@@ -75,22 +75,6 @@ function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
 }
 
 
-//test lettura del file nodiArchi.json corretta
-function testLetturaCorretta() {
-    console.log("\n -------------TEST LETTURA CORRETTA---------------")
-    let passato = 1;
-    //lettura file json
-    const jsonString = readFileSync("./nodiArchi.json");
-    //creazione array di oggetti da json
-    const grafoDaCaricare = JSON.parse(jsonString);
-    //crezione grafo
-    const grafo = new Grafo();
-    console.log(grafoDaCaricare);
-    jsonAGrafo(grafoDaCaricare);
-    if (grafo.nodi.dimensione !== 9) passato = 0;
-    if (grafo.archi.dimensione !== 16) passato = 0;
-}
-//Test Cancellazione corretta
 //Test per scrittura corretta
 
 console.log("\n -------------TEST---------------")
@@ -119,3 +103,4 @@ console.log("\nCalcolo K core dei nodi")
 let core = calcolatoreKCore(grafo);
 console.log("Core number dei nodi: ")
 console.log(core);
+salvaJsonGrafo(grafo);

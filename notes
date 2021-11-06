@@ -1,9 +1,7 @@
-1.Scandisco i nodi e gli archi in modo che formino un array, in modo da ridurre la complessità nell'apprire un file json e creare gli oggetti
-
-5. Finito questo algoritmo riesco a conoscere il core number, e successivamente,
-dopo aver Riorientato gli archi possiamo sapere in tempo costante per sapere se esiste un cammino tra due nodi.
-Quando cancello un nodo riordino iterando sull'array sort, prendo tutti gli archi e li oriento per essere uscenti e li metto entranti per il nodo vicino a quello appena cancellato
-
-2.controllo dell'assegnazione degli id (caso rimozione e aggiunta)
-Array sort mi dice l'ordine di cancellazione e mi permette di ricostruire con gli archi uscenti partendo dai primi cancellati (quelli più esterni)
-
+1.  Durante la conversione da json a oggetti, come faccio a passare il nodo giusto nel costruttore dell'arco? Risolto con complessità n^2, si può fare di meglio?
+    Scandisco i nodi e gli archi in modo che formino un array, cpsì da ridurre la complessità nell'apprire un file json e creare gli oggetti
+2.  Controllare in tempo costante esista un arco tra due nodi
+3.  Scaricare yed, posso usarlo per creare grafi random e utilizzare la libreria (con un'opportuna conversione da gml a json), per testare in quanto tempo
+    vengono eseguite le operazioni.
+    Poi posso rivisualizzarlo perchè mi crea in automatico la parte grafica.
+    Mi torna utile per testare e per esportare immagini. Potrei usare networkX

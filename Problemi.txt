@@ -1,4 +1,0 @@
-1.Durante la conversione da json a oggetti, come faccio a passare il nodo giusto nel costruttore dell'arco? Risolto con complessità n^2, si può fare di meglio?
-
-2. bug calcolo degli array in batajeli (sort)
-

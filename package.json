@@ -1,0 +1,9 @@
+{
+    "scripts": {
+        "test": "jest"
+    },
+    "dependencies": {
+        "cross-env": "^7.0.3",
+        "jest-esm-transformer": "^1.0.0"
+    }
+}

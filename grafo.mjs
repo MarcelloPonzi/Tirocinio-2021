@@ -130,4 +130,13 @@ export default class Grafo {
         return this.adiacenze;
     }
 
+    creaArrayNodi() {
+        var arrayNodi = new Array(this.nodi.dimensione);
+        let n = this.nodi.head;
+        while (n) {
+            arrayNodi[n.obj.id] = n.obj;
+            n = n.next;
+        }
+        return arrayNodi;
+    }
 }
