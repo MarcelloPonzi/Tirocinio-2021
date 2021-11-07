@@ -1,6 +1,5 @@
 1.  Durante la conversione da json a oggetti, come faccio a passare il nodo giusto nel costruttore dell'arco? Risolto con complessità n^2, si può fare di meglio?
     Scandisco i nodi e gli archi in modo che formino un array, cpsì da ridurre la complessità nell'apprire un file json e creare gli oggetti
-2.  Controllare in tempo costante esista un arco tra due nodi
 3.  Scaricare yed, posso usarlo per creare grafi random e utilizzare la libreria (con un'opportuna conversione da gml a json), per testare in quanto tempo
     vengono eseguite le operazioni.
     Poi posso rivisualizzarlo perchè mi crea in automatico la parte grafica.

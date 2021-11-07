@@ -74,6 +74,25 @@ function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
     grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
 }
 
+function verificaAdiacenza(nodo1, nodo2) {
+    let item = nodo1.archiUscenti.head;
+    while (item) {
+        if (item.obj.to === nodo2) {
+            console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.");
+            return true;
+        } else item = item.next;
+    }
+    item = nodo2.archiUscenti.head;
+    while (item) {
+        if (item.obj.to === nodo1) {
+            console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.");
+            return true
+        } else item = item.next;
+    }
+    console.log("I nodi " + nodo1.id + " e " + nodo2.id + " non sono adiacenti.");
+    return false;
+}
+
 
 //Test per scrittura corretta
 
@@ -91,16 +110,19 @@ jsonAGrafo(grafoDaCaricare);
 // grafo.stampaNodi();
 // grafo.stampaArchi();
 console.log("\n--------------------------------")
-let item = grafo.nodi.head;
-// while (item) {
-//     console.log("NODO: " + item.obj.id);
-//     grafo.stampaArchiUscentiNodo(item.obj);
-//     grafo.stampaArchiEntrantiNodo(item.obj);
-//     grafo.stampaArchiAdiacentiNodo(item.obj);
-//     item = item.next;
-// }
+
 console.log("\nCalcolo K core dei nodi")
 let core = calcolatoreKCore(grafo);
 console.log("Core number dei nodi: ")
 console.log(core);
 salvaJsonGrafo(grafo);
+verificaAdiacenza(grafo.nodi.head.obj, grafo.nodi.tail.prev.prev.obj);
+
+let item = grafo.nodi.head;
+while (item) {
+    console.log("NODO: " + item.obj.id);
+    grafo.stampaArchiUscentiNodo(item.obj);
+    grafo.stampaArchiEntrantiNodo(item.obj);
+    grafo.stampaArchiAdiacentiNodo(item.obj);
+    item = item.next;
+}
