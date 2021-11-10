@@ -1,3 +1,5 @@
+//funzione che calcolca il k-core dei nodi del grafo passato come parametro
+//e riorienta il grafo
 export default function calcolatoreKCore(grafo) {
     grafo.calcolatoreMaxGrado();
     console.log("Il grado massimo è " + grafo.max_grado);
@@ -78,7 +80,7 @@ export default function calcolatoreKCore(grafo) {
 
     //STEP 3
     //creo un array di nodi
-    var arrayNodi = grafo.creaArrayNodi();
+    let arrayNodi = grafo.creaArrayNodi();
     //svuoto le liste entranti ed uscenti di ogni nodo
     arrayNodi.forEach(nodo => {
         nodo.archiUscenti.svuotaLista("uscPos");
@@ -108,19 +110,27 @@ export default function calcolatoreKCore(grafo) {
                 sort[pos[u.i]] = sort[pos[temp]];
                 sort[pos[temp]] = temp;
                 bin[deg[u.id] + 1] + 1;
-                //modifico l'arco e lo aggiungo ad entranti ed uscenti
+                //modifico l'arco
                 //from è il nodo che sto eliminando, in modo da avere l'arco orientato uscendo
                 a.obj.from = n;
                 a.obj.to = u;
-                n.archiUscenti.inserisciCoda(a.obj, 'uscPos');
-                u.archiEntranti.inserisciCoda(a.obj, 'entrPos');
             }
+
             //passo al prossimo u adiacente a n
             a = a.next;
         }
-        //cancello array nodi (struttura che non voglio sia usata al di fuori di abtajeli)
 
     }
-    arrayNodi = null;
+    item = grafo.archi.head;
+    while (item) {
+        //aggiunge arco alla lista degli archi uscenti dal nodo
+        item.obj.from.archiUscenti.inserisciCoda(item.obj, 'uscPos');
+
+        //aggiunge arco alla lista degli archi entranti nel nodo
+        item.obj.to.archiEntranti.inserisciCoda(item.obj, 'entrPos');
+        item = item.next;
+    }
+
+
     return deg;
 }
