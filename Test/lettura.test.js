@@ -1,4 +1,3 @@
-import * from '../app';
 //test lettura del file nodiArchi.json corretta
 
 //lettura file json
