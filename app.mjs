@@ -6,6 +6,14 @@ import {
     readFileSync,
     writeFile
 } from "fs";
+import {
+    parseString,
+    Parser
+} from "xml2js";
+import {
+    GraphMLParser
+} from "graphml-js";
+
 
 
 //funzione che converte una stringa json in un oggetto e lo aggiunge al grafo
@@ -74,12 +82,22 @@ function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
     grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
 }
 
+//GML
+// const gmlString = readFileSync("./gmlTest.gml", "ascii");
+// console.log(gmlString);
+// const jsonString = gmlToJson(gmlString);
 
-//Test per scrittura corretta
+
+//GRAPHML
+var graphmlString = readFileSync("./gmlTest.graphml")
+var parser = new GraphMLParser();
+parser.parse(graphmlString, function (err, graph) {
+    console.log(graph)
+});
 
 console.log("\n -------------TEST---------------")
 //lettura file json
-const jsonString = readFileSync("./nodiArchiTest.json");
+//const jsonString = readFileSync("./nodiArchiTest.json");
 //creazione array di oggetti da json
 const grafoDaCaricare = JSON.parse(jsonString);
 console.log("Nodi da caricare:");

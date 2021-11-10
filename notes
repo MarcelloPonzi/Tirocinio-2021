@@ -5,3 +5,5 @@
     vengono eseguite le operazioni.
     Poi posso rivisualizzarlo perchè mi crea in automatico la parte grafica.
     Mi torna utile per testare e per esportare immagini. Potrei usare networkX
+    3.2 Prendo graphml e lo risputo o gml o graphml
+    4.Vogliamo prendere n coppie di un grafo molto grado, misura il tempo medio e peggiore, riordinarlo e poi ricontrollare il tempo.

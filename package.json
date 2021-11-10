@@ -4,6 +4,8 @@
     },
     "dependencies": {
         "cross-env": "^7.0.3",
-        "jest-esm-transformer": "^1.0.0"
+        "graphml-js": "^0.4.0",
+        "jest-esm-transformer": "^1.0.0",
+        "xml2js": "^0.4.23"
     }
 }
