@@ -1,8 +1,6 @@
 1.  Durante la conversione da json a oggetti, come faccio a passare il nodo giusto nel costruttore dell'arco? Risolto con complessità n^2, si può fare di meglio?
     Scandisco i nodi e gli archi in modo che formino un array, cpsì da ridurre la complessità nell'apprire un file json e creare gli oggetti
-3.  Scaricare yed, posso usarlo per creare grafi random e utilizzare la libreria (con un'opportuna conversione da gml a json), per testare in quanto tempo
-    vengono eseguite le operazioni.
-    Poi posso rivisualizzarlo perchè mi crea in automatico la parte grafica.
-    Mi torna utile per testare e per esportare immagini. Potrei usare networkX
-    3.2 Prendo graphml e lo risputo o gml o graphml
-    4.Vogliamo prendere n coppie di un grafo molto grado, misura il tempo medio e peggiore, riordinarlo e poi ricontrollare il tempo.
+
+2.  Vogliamo prendere n coppie di un grafo molto grado, misura il tempo medio e peggiore, riordinarlo e poi ricontrollare il tempo.
+3.  fare selezionatore random di coppie
+4.  cercare funzione per calcolare il tempo per eseguire un'istruzione

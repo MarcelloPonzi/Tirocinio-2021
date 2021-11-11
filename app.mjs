@@ -7,14 +7,11 @@ import {
     writeFile
 } from "fs";
 import {
-    parseString,
-    Parser
-} from "xml2js";
-import {
     GraphMLParser
 } from "graphml-js";
 
 
+//FUNZIONI CREAZIONE GRAFO
 
 //funzione che converte una stringa json in un oggetto e lo aggiunge al grafo
 function jsonAGrafo(grafoDaCaricare) {
@@ -42,6 +39,43 @@ function jsonAGrafo(grafoDaCaricare) {
         }
     });
 }
+
+function graphmlAGrafo(graph) {
+    graph.nodes.forEach(nodo => {
+        grafo.aggiungiNodo();
+
+    });
+    graph.edges.forEach(arco => {
+        //per ogni arco cerco i nodi con l'id uguale al from e al to dell'oggetto json
+        let nodoFrom = null; //riferimento a nodo from cercato
+        let nodoTo = null; //riferimento a nodo to cercato
+        let item = grafo.nodi.head;
+        while (item) {
+            //prendo il char in pos 1 perchè yed stampa gli id in forma n1 (nodi) e1(archi)
+            if (arco._source[1] == item.obj.id) nodoFrom = item.obj;
+            if (arco._target[1] == item.obj.id) nodoTo = item.obj;
+            item = item.next;
+        }
+        //trovati i nodi corretti e ottenuti i riferimenti a questi, aggiungo l'arco
+        //se e solo se possiede entrambi i riferimenti ai nodi (Coerenza del grafo, 
+        //non posso avere un arco tra nodi non esistenti)
+        if (nodoFrom !== null && nodoTo !== null) {
+            grafo.aggiungiArco(nodoFrom, nodoTo);
+        }
+    });
+
+}
+
+function nuovoNodoUtente(grafo) {
+    grafo.aggiungiNodo(new Nodo(grafo.max_id_nodi));
+}
+
+function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
+    grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
+}
+
+
+//FUNZIONI DI SALVATAGGIO
 
 function salvaJsonGrafo(grafo) {
     //converto i nodi
@@ -74,15 +108,34 @@ function salvaJsonGrafo(grafo) {
     });
 }
 
-function nuovoNodoUtente(grafo) {
-    grafo.aggiungiNodo(new Nodo(grafo.max_id_nodi));
+function salvaGraphmlGrafo(grafo) {
+    //converto i nodi
+    let item = grafo.nodi.head;
+    var graphml = new String("\<?xml version=\"1.0\" encoding=\"UTF-8\"?\><graphml xmlns=\"http:\//graphml.graphdrawing.org/xmlns\" xmlns:xsi=\"http:\//www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http:\//graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\"><graph id=\"G\" edgedefault=\"directed\">");
+    while (item) {
+        graphml = graphml.concat("", item.obj.inGraphml());
+        item = item.next;
+    }
+    //converto gli archi
+    item = grafo.archi.head;
+    while (item) {
+        graphml = graphml.concat("", item.obj.inGraphml());
+        item = item.next;
+    }
+    graphml = graphml.concat("", "</graph></graphml>");
+    //salvo in nuovo file
+    writeFile("output.graphml", graphml.toString(), function (err) {
+        if (err) {
+            console.log(err);
+        }
+    });
 }
 
-function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
-    grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
-}
 
-function verificaAdiacenza(nodo1, nodo2) {
+//FUNZIONI CONTROLLO ADIACENZA
+
+//funzione che controlla l'adiacenza dei nodi dopo che il grafo è stato riordinato
+function verificaAdiacenzaRiordinato(nodo1, nodo2) {
     let item = nodo1.archiUscenti.head;
     while (item) {
         if (item.obj.to === nodo2) {
@@ -100,43 +153,28 @@ function verificaAdiacenza(nodo1, nodo2) {
     console.log("I nodi " + nodo1.id + " e " + nodo2.id + " non sono adiacenti.");
     return false;
 }
+//-------------------START------------------------
+//crezione grafo
+const grafo = new Grafo();
 
-//GML
-// const gmlString = readFileSync("./gmlTest.gml", "ascii");
-// console.log(gmlString);
-// const jsonString = gmlToJson(gmlString);
-
-
-
-//GRAPHML
-var graphmlString = readFileSync("./gmlTest.graphml")
+//lettura GRAPHML
+var graphmlString = readFileSync("./input.graphml")
 var parser = new GraphMLParser();
 parser.parse(graphmlString, function (err, graph) {
     console.log(graph)
+    //creazione array di oggetti da parsed graphml
+    graphmlAGrafo(graph);
 });
 
-console.log("\n -------------TEST---------------")
-//lettura file json
-//const jsonString = readFileSync("./nodiArchiTest.json");
-//creazione array di oggetti da json
-const grafoDaCaricare = JSON.parse(jsonString);
-console.log("Nodi da caricare:");
-console.log(grafoDaCaricare);
-//crezione grafo
-const grafo = new Grafo();
-// console.log(grafoDaCaricare);
-jsonAGrafo(grafoDaCaricare);
-// grafo.stampaNodi();
-// grafo.stampaArchi();
-console.log("\n--------------------------------")
+grafo.stampaNodi();
+grafo.stampaArchi();
+
 
 console.log("\nCalcolo K core dei nodi")
+//in realtà è un riordinatore
 let core = calcolatoreKCore(grafo);
 console.log("Core number dei nodi: ")
 console.log(core);
-salvaJsonGrafo(grafo);
-
-verificaAdiacenza(grafo.nodi.head.obj, grafo.nodi.tail.prev.prev.obj);
 
 let item = grafo.nodi.head;
 while (item) {
@@ -146,3 +184,5 @@ while (item) {
     grafo.stampaArchiAdiacentiNodo(item.obj);
     item = item.next;
 }
+
+salvaGraphmlGrafo(grafo);

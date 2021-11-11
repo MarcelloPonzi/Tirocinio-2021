@@ -19,4 +19,8 @@ export default class Arco {
             "\"to\":" + this.to.id + "}";
         return st;
     }
+    inGraphml() {
+        var st = "<edge source=\"" + this.from.id + "\" target=\"" + this.to.id + "\"/>";
+        return st;
+    }
 };

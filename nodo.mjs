@@ -15,4 +15,9 @@ export default class Nodo {
         var st = "{\"id\":" + this.id + "}";
         return st;
     }
+
+    inGraphml() {
+        var st = "<node id=\"" + this.id + "\"/>"
+        return st;
+    }
 }
