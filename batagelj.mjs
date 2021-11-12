@@ -1,6 +1,6 @@
 //funzione che calcolca il k-core dei nodi del grafo passato come parametro
 //e riorienta il grafo
-export default function calcolatoreKCore(grafo) {
+export default function riorientatorePerCore(grafo) {
     grafo.calcolatoreMaxGrado();
     console.log("Il grado massimo è " + grafo.max_grado);
     //codice che controlla gli id siano uniformi e si sosseguano senza "salti"(condizione necessaria)
@@ -36,9 +36,10 @@ export default function calcolatoreKCore(grafo) {
     for (let i = 0; i <= deg.length - 1; i++) {
         bin[deg[i]]++;
     }
-    console.log("Deg e bin step 2: ")
-    console.log(deg);
-    console.log(bin);
+    // console.log("Deg e bin step 2: ")
+    // console.log(deg);
+    // console.log(bin);
+
     //STEP 2.1 Modifica l'array bin con il numero degli elementi che hanno i valori
     //inferiori al grado dato
     var start = 0;
@@ -47,8 +48,8 @@ export default function calcolatoreKCore(grafo) {
         bin[d] = start;
         start = start + num;
     }
-    console.log("Bin step 2.1: ")
-    console.log(bin)
+    // console.log("Bin step 2.1: ")
+    // console.log(bin)
 
     //STEP 2.3 itera tra gli elementi di deg e inserisci gli id dei nodi nel
     //bin corrispondente
@@ -57,26 +58,30 @@ export default function calcolatoreKCore(grafo) {
         sort[bin[deg[n]]] = n;
         bin[deg[n]] = bin[deg[n]] + 1
     }
-    console.log("Sort a step 2.3: ")
-    console.log(sort);
-    console.log("Bin a step 2.3:")
-    console.log(bin);
+    // console.log("Sort a step 2.3: ")
+    // console.log(sort);
+    // console.log("Bin a step 2.3:")
+    // console.log(bin);
+
     //STEP 2.4 resetta i valori di bin all'inizio di ogni blocchetto
     //errore nelle slides??Deve partire da max_grado e non max_grado-1
     for (let d = grafo.max_grado; d >= 1; d--) {
         bin[d] = bin[d - 1];
     }
     bin[0] = 0;
-    console.log("Bin step 2.4 con valori riportati indietro:");
-    console.log(bin);
+
+    // console.log("Bin step 2.4 con valori riportati indietro:");
+    // console.log(bin);
+
     var pos = new Array(grafo.nodi.dimensione - 1);
     for (let i = 0; i <= grafo.nodi.dimensione - 1; i++) {
         pos[sort[i]] = i;
     }
-    console.log("Pos: ");
-    console.log(pos);
-    console.log("Sort: ");
-    console.log(sort);
+
+    // console.log("Pos: ");
+    // console.log(pos);
+    // console.log("Sort: ");
+    // console.log(sort);
 
     //STEP 3
     //creo un array di nodi
@@ -130,7 +135,6 @@ export default function calcolatoreKCore(grafo) {
         item.obj.to.archiEntranti.inserisciCoda(item.obj, 'entrPos');
         item = item.next;
     }
-
 
     return deg;
 }
