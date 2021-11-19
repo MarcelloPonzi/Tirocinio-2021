@@ -24,8 +24,9 @@ export default class Grafo {
     aggiungiNodo() {
         var nuovoNodo = new Nodo(this.max_id_nodi);
         this.nodi.inserisciCoda(nuovoNodo);
-        console.log("Nodo aggiunto con id " + this.max_id_nodi);
+        //console.log("Nodo aggiunto con id " + this.max_id_nodi);
         this.max_id_nodi++;
+        return nuovoNodo;
     }
 
     rimuoviNodo(nodo) {
@@ -51,7 +52,7 @@ export default class Grafo {
         //aggiunge arco alla lista degli archi adiacenti dei nodi
         arco.from.archiAdiacenti.inserisciCoda(arco, 'fromPos');
         arco.to.archiAdiacenti.inserisciCoda(arco, 'toPos');
-        console.log("Arco " + arco.from.id + " --> " + arco.to.id + " aggiunto con id " + this.max_id_archi);
+        //console.log("Arco " + arco.from.id + " --> " + arco.to.id + " aggiunto con id " + this.max_id_archi);
         this.max_id_archi++;
     }
 

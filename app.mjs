@@ -2,17 +2,24 @@ import Grafo from "./grafo.mjs";
 import Nodo from "./nodo.mjs";
 import Arco from "./arco.mjs";
 import {
+    appendFile,
+    appendFileSync,
     readFileSync,
-    writeFile
+    writeFile,
+    writeFileSync
 } from "fs";
 import {
     GraphMLParser
 } from "graphml-js";
 import riorientatorePerCore from "./batagelj.mjs";
+import generatoreCoppieRandom from "./generatoreCoppieRandom.mjs"
 import {
-    uniqueRangeGenerator,
-    daComboGenerator
-} from "./generatoreCoppieRandom.mjs"
+    performance
+} from "perf_hooks";
+import {
+    sumSimple
+} from "simple-statistics";
+
 
 
 //FUNZIONI CREAZIONE GRAFO
@@ -74,11 +81,11 @@ function graphmlAGrafo(graph) {
 }
 
 function nuovoNodoUtente(grafo) {
-    grafo.aggiungiNodo(new Nodo(grafo.max_id_nodi));
+    grafo.aggiungiNodo();
 }
 
 function nuovoArcoUtente(grafo, nodoFrom, nodoTo) {
-    grafo.aggiungiArco(new Arco(grafo.max_id_archi, nodoFrom, nodoTo));
+    grafo.aggiungiArco(nodoFrom, nodoTo);
 }
 
 
@@ -140,47 +147,73 @@ function salvaGraphmlGrafo(grafo) {
 
 
 //FUNZIONI CONTROLLO ADIACENZA
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}
 //funzione che controlla l'adiacenze dei nodi
 function verificaAdiacenza(nodo1, nodo2) {
-    let item = nodo1.archiUscenti.head;
+    const t1 = performance.now();
+    let item = nodo1.archiEntranti.head;
     while (item) {
-        if (item.obj.to === nodo2) {
-            console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.")
-            return true;
-        } else item = item.next;
-    }
-    item = nodo1.archiEntranti.head;
-    while (item) {
+        controlli1++;
         if (item.obj.from === nodo2) {
-            console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.")
-            return true;
+            //console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.")
+            const t2 = performance.now();
+            return t2 - t1;
         } else item = item.next;
     }
-    console.log("I nodi " + nodo1.id + " e " + nodo2.id + " non sono adiacenti.");
-    return false;
+    item = nodo1.archiUscenti.head;
+    while (item) {
+        controlli1++;
+        if (item.obj.to === nodo2) {
+            //console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.")
+            const t2 = performance.now();
+            return t2 - t1;
+        } else item = item.next;
+    }
+    //console.log("I nodi " + nodo1.id + " e " + nodo2.id + " non sono adiacenti."); 
+    const t2 = performance.now();
+    return t2 - t1;
 }
 //funzione che controlla l'adiacenza dei nodi dopo che il grafo è stato riorientato usando solo la lista degli uscenti
 function verificaAdiacenzaRiorientato(nodo1, nodo2) {
+    const t1 = performance.now();
     let item = nodo1.archiUscenti.head;
     while (item) {
+        controlli2++;
         if (item.obj.to === nodo2) {
-            console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.");
-            return true;
+            //console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.");
+            const t2 = performance.now();
+            return t2 - t1;
         } else item = item.next;
     }
     item = nodo2.archiUscenti.head;
     while (item) {
+        controlli2++;
         if (item.obj.to === nodo1) {
-            console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.");
-            return true
+            //console.log("I nodi " + nodo1.id + " e " + nodo2.id + " sono adiacenti.");
+            const t2 = performance.now();
+            return t2 - t1;
         } else item = item.next;
     }
-    console.log("I nodi " + nodo1.id + " e " + nodo2.id + " non sono adiacenti.");
-    return false;
+    //console.log("I nodi " + nodo1.id + " e " + nodo2.id + " non sono adiacenti.");
+    const t2 = performance.now();
+    return t2 - t1;
 }
+
+
+
+
+
 //-------------------START------------------------
 //crezione grafo
-const grafo = new Grafo();
+var grafo = new Grafo();
+var controlli1 = 0;
+var controlli2 = 0;
 
 //lettura GRAPHML
 var graphmlString = readFileSync("./input.graphml")
@@ -192,37 +225,57 @@ parser.parse(graphmlString, function (err, graph) {
 
 //Creo array di nodi
 const arrayNodi = grafo.creaArrayNodi();
+//Creo array coppie di num random
+var arrayCoppie = generatoreCoppieRandom(arrayNodi);
 
-//Testo su 10000 coppie di nodi
-const arrayCoppie = new Array(10000);
-
-arrayCoppie = daComboGenerator(uniqueRangeGenerator(0, 9999), 2);
-
+//misuro il tempo sul grafo non riorientato
+var temp = 0;
+var tempoPeggiore1 = 0;
+const t3 = performance.now();
 arrayCoppie.forEach(coppia => {
-    verificaAdiacenza(arrayNodi[coppia[0], arrayNodi[coppia[1]]]);
+    temp = verificaAdiacenza(arrayNodi[coppia[0]], arrayNodi[coppia[1]]);
+    if (temp > tempoPeggiore1) {
+        tempoPeggiore1 = temp;
+    }
 });
+const t4 = performance.now();
+console.log("verificaAdiacenza ha impiegato " + (t4 - t3) + " millisecondi con " + controlli1 + " controlli con tempo peggiore = " + tempoPeggiore1);
 
+
+//rioriento il grafo
 console.log("\nCalcolo K core dei nodi e rioriento il grafo")
 let core = riorientatorePerCore(grafo);
-console.log("Core number dei nodi: ")
-console.log(core);
 
+// console.log("Core number dei nodi: ")
+// console.log(core);
+var maxCore = 0;
+for (let i = 0; i <= core.length - 1; i++) {
+    if (maxCore < core[i]) {
+        maxCore = core[i];
+    }
+}
+console.log("Il core massimo è: " + maxCore);
+var coreMedio = Math.floor(sumSimple(core) / core.length);
+console.log(coreMedio);
+
+var tempoPeggiore2 = 0;
+//misuro il tempo sul grafo riorientato
+const a1 = performance.now();
+temp = 0;
 arrayCoppie.forEach(coppia => {
-    verificaAdiacenzaRiorientato(arrayNodi[coppia[0], arrayNodi[coppia[1]]]);
+    temp = verificaAdiacenzaRiorientato(arrayNodi[coppia[0]], arrayNodi[coppia[1]]);
+    if (temp > tempoPeggiore2) {
+        tempoPeggiore2 = temp;
+    }
 });
+const a2 = performance.now();
+console.log("verificaAdiacenzaRiorientato ha impiegato " + (a2 - a1) + " millisecondi con " + controlli2 + " controlli con tempo peggiore = " + tempoPeggiore2);
 
 
-
-
-// grafo.stampaNodi();
-// grafo.stampaArchi();
-// let item = grafo.nodi.head;
-// while (item) {
-//     console.log("NODO: " + item.obj.id);
-//     grafo.stampaArchiUscentiNodo(item.obj);
-//     grafo.stampaArchiEntrantiNodo(item.obj);
-//     grafo.stampaArchiAdiacentiNodo(item.obj);
-//     item = item.next;
-// }
+var statistiche1 = '\n\n-Non riorientato --> Tempo medio: ' + ((t4 - t3) / controlli1).toFixed(5) + ' ms    Tempo peggiore: ' + tempoPeggiore1.toFixed(5) + ' ms';
+var statistiche2 = '\n-Riorientato     --> Tempo medio: ' + ((a2 - a1) / controlli2).toFixed(5) + ' ms   Tempo peggiore: ' + tempoPeggiore2.toFixed(5) + ' ms';
+appendFileSync("Statistiche.txt", statistiche1 + statistiche2, "UTF-8", {
+    'flags': 'a+'
+});
 
 salvaGraphmlGrafo(grafo);

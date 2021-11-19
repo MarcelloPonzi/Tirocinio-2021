@@ -4,3 +4,8 @@
 2.  Vogliamo prendere n coppie di un grafo molto grado, misura il tempo medio e peggiore, riordinarlo e poi ricontrollare il tempo.
 3.  fare selezionatore random di coppie
 4.  cercare funzione per calcolare il tempo per eseguire un'istruzione
+5. Ho un vantaggio quando la lsita di adiacenti del nodo 1 è maggiore
+    della somma degli uscenti del nodo 1 e 2
+
+6.Devo vedere il numero esatto di controlli usando anche sleep
+7.vedere un grafo in cui è effettivamente efficiente l'algoritmo

@@ -1,0 +1,299 @@
+Verifica adiacenza di 10'000 coppie random su grafo planare con 1000 nodi e 2n archi, grado massimo 10, core massimo 4, core medio 2
+
+-Non riorientato --> Tempo medio: 0.00041 ms   Tempo peggiore: 0.49000 ms
+-Riorientato     --> Tempo medio: 0.00028 ms   Tempo peggiore: 0.10400 ms
+
+-Non riorientato --> Tempo medio: 0.00037 ms   Tempo peggiore: 0.52270 ms
+-Riorientato     --> Tempo medio: 0.00034 ms   Tempo peggiore: 0.09330 ms
+
+-Non riorientato --> Tempo medio: 0.00035 ms    Tempo peggiore: 0.49110 ms
+-Riorientato     --> Tempo medio: 0.00034 ms   Tempo peggiore: 0.12110 ms
+
+-Non riorientato --> Tempo medio: 0.00032 ms    Tempo peggiore: 0.43460 ms
+-Riorientato     --> Tempo medio: 0.00029 ms   Tempo peggiore: 0.16850 ms
+
+-Non riorientato --> Tempo medio: 0.00034 ms    Tempo peggiore: 0.43240 ms
+-Riorientato     --> Tempo medio: 0.00033 ms   Tempo peggiore: 0.13530 ms
+
+-Non riorientato --> Tempo medio: 0.00033 ms    Tempo peggiore: 0.42900 ms
+-Riorientato     --> Tempo medio: 0.00026 ms   Tempo peggiore: 0.17030 ms
+
+-Non riorientato --> Tempo medio: 0.00035 ms    Tempo peggiore: 0.43050 ms
+-Riorientato     --> Tempo medio: 0.00030 ms   Tempo peggiore: 0.44300 ms
+
+-Non riorientato --> Tempo medio: 0.00034 ms    Tempo peggiore: 0.55970 ms
+-Riorientato     --> Tempo medio: 0.00025 ms   Tempo peggiore: 0.17350 ms
+
+-Non riorientato --> Tempo medio: 0.00034 ms    Tempo peggiore: 0.51310 ms
+-Riorientato     --> Tempo medio: 0.00025 ms   Tempo peggiore: 0.10490 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo planare con 1000 nodi e 1n archi, grado massimo 6, core massimo 2, core medio 1
+
+-Non riorientato --> Tempo medio: 0.00057 ms    Tempo peggiore: 0.42900 ms
+-Riorientato     --> Tempo medio: 0.00053 ms   Tempo peggiore: 0.02500 ms
+
+-Non riorientato --> Tempo medio: 0.00069 ms    Tempo peggiore: 0.41590 ms
+-Riorientato     --> Tempo medio: 0.00056 ms   Tempo peggiore: 0.21530 ms
+
+-Non riorientato --> Tempo medio: 0.00055 ms    Tempo peggiore: 0.41990 ms
+-Riorientato     --> Tempo medio: 0.00045 ms   Tempo peggiore: 0.17780 ms
+
+-Non riorientato --> Tempo medio: 0.00057 ms    Tempo peggiore: 0.52820 ms
+-Riorientato     --> Tempo medio: 0.00045 ms   Tempo peggiore: 0.13730 ms
+
+-Non riorientato --> Tempo medio: 0.00068 ms    Tempo peggiore: 0.41670 ms
+-Riorientato     --> Tempo medio: 0.00063 ms   Tempo peggiore: 0.13240 ms
+
+-Non riorientato --> Tempo medio: 0.00074 ms    Tempo peggiore: 0.49320 ms
+-Riorientato     --> Tempo medio: 0.00069 ms   Tempo peggiore: 0.32180 ms
+
+-Non riorientato --> Tempo medio: 0.00054 ms    Tempo peggiore: 0.41960 ms
+-Riorientato     --> Tempo medio: 0.00040 ms   Tempo peggiore: 0.09410 ms
+
+-Non riorientato --> Tempo medio: 0.00056 ms    Tempo peggiore: 0.41840 ms
+-Riorientato     --> Tempo medio: 0.00047 ms   Tempo peggiore: 0.19110 ms
+
+-Non riorientato --> Tempo medio: 0.00062 ms    Tempo peggiore: 0.45770 ms
+-Riorientato     --> Tempo medio: 0.00061 ms   Tempo peggiore: 0.10340 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo planare con 1000 nodi e 1.5n archi, grado massimo 9, core massimo 3, core medio 1
+
+-Non riorientato --> Tempo medio: 0.00051 ms    Tempo peggiore: 0.48970 ms
+-Riorientato     --> Tempo medio: 0.00039 ms   Tempo peggiore: 0.18560 ms
+
+-Non riorientato --> Tempo medio: 0.00051 ms    Tempo peggiore: 0.42840 ms
+-Riorientato     --> Tempo medio: 0.00041 ms   Tempo peggiore: 0.17070 ms
+
+-Non riorientato --> Tempo medio: 0.00051 ms    Tempo peggiore: 0.46260 ms
+-Riorientato     --> Tempo medio: 0.00043 ms   Tempo peggiore: 0.21330 ms
+
+-Non riorientato --> Tempo medio: 0.00046 ms    Tempo peggiore: 0.44550 ms
+-Riorientato     --> Tempo medio: 0.00040 ms   Tempo peggiore: 0.19040 ms
+
+-Non riorientato --> Tempo medio: 0.00048 ms    Tempo peggiore: 0.43700 ms
+-Riorientato     --> Tempo medio: 0.00044 ms   Tempo peggiore: 0.13330 ms
+
+-Non riorientato --> Tempo medio: 0.00042 ms    Tempo peggiore: 0.44380 ms
+-Riorientato     --> Tempo medio: 0.00033 ms   Tempo peggiore: 0.11850 ms
+
+-Non riorientato --> Tempo medio: 0.00043 ms    Tempo peggiore: 0.45800 ms
+-Riorientato     --> Tempo medio: 0.00038 ms   Tempo peggiore: 0.12300 ms
+
+-Non riorientato --> Tempo medio: 0.00050 ms    Tempo peggiore: 0.41950 ms
+-Riorientato     --> Tempo medio: 0.00034 ms   Tempo peggiore: 0.00630 ms
+
+-Non riorientato --> Tempo medio: 0.00041 ms    Tempo peggiore: 0.42210 ms
+-Riorientato     --> Tempo medio: 0.00033 ms   Tempo peggiore: 0.07990 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo planare con 1000 nodi e max archi possibile (2994), grado massimo 14, core massimo 5, core medio 4
+
+
+-Non riorientato --> Tempo medio: 0.00029 ms    Tempo peggiore: 0.38680 ms
+-Riorientato     --> Tempo medio: 0.00022 ms   Tempo peggiore: 0.13360 ms
+
+-Non riorientato --> Tempo medio: 0.00031 ms    Tempo peggiore: 0.43450 ms
+-Riorientato     --> Tempo medio: 0.00022 ms   Tempo peggiore: 0.18870 ms
+
+-Non riorientato --> Tempo medio: 0.00030 ms    Tempo peggiore: 0.40880 ms
+-Riorientato     --> Tempo medio: 0.00021 ms   Tempo peggiore: 0.16400 ms
+
+-Non riorientato --> Tempo medio: 0.00031 ms    Tempo peggiore: 0.50630 ms
+-Riorientato     --> Tempo medio: 0.00020 ms   Tempo peggiore: 0.17610 ms
+
+-Non riorientato --> Tempo medio: 0.00030 ms    Tempo peggiore: 0.40170 ms
+-Riorientato     --> Tempo medio: 0.00020 ms   Tempo peggiore: 0.19650 ms
+
+-Non riorientato --> Tempo medio: 0.00033 ms    Tempo peggiore: 0.37840 ms
+-Riorientato     --> Tempo medio: 0.00023 ms   Tempo peggiore: 0.06880 ms
+
+-Non riorientato --> Tempo medio: 0.00031 ms    Tempo peggiore: 0.35710 ms
+-Riorientato     --> Tempo medio: 0.00020 ms   Tempo peggiore: 0.28640 ms
+
+-Non riorientato --> Tempo medio: 0.00029 ms    Tempo peggiore: 0.36780 ms
+-Riorientato     --> Tempo medio: 0.00020 ms   Tempo peggiore: 0.45610 ms
+
+-Non riorientato --> Tempo medio: 0.00031 ms    Tempo peggiore: 0.51590 ms
+-Riorientato     --> Tempo medio: 0.00026 ms   Tempo peggiore: 0.18480 ms
+
+-Non riorientato --> Tempo medio: 0.00024 ms    Tempo peggiore: 0.36420 ms
+-Riorientato     --> Tempo medio: 0.00021 ms   Tempo peggiore: 0.05310 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo random con 1000 nodi e 1n archi, grado massimo 7, core massimo 3, core medio 1
+
+-Non riorientato --> Tempo medio: 0.00055 ms    Tempo peggiore: 0.43880 ms
+-Riorientato     --> Tempo medio: 0.00058 ms   Tempo peggiore: 0.01190 ms
+
+-Non riorientato --> Tempo medio: 0.00067 ms    Tempo peggiore: 0.51070 ms
+-Riorientato     --> Tempo medio: 0.00078 ms   Tempo peggiore: 0.12000 ms
+
+-Non riorientato --> Tempo medio: 0.00068 ms    Tempo peggiore: 0.42250 ms
+-Riorientato     --> Tempo medio: 0.00048 ms   Tempo peggiore: 0.10530 ms
+
+-Non riorientato --> Tempo medio: 0.00059 ms    Tempo peggiore: 0.42850 ms
+-Riorientato     --> Tempo medio: 0.00049 ms   Tempo peggiore: 0.00460 ms
+
+-Non riorientato --> Tempo medio: 0.00074 ms    Tempo peggiore: 0.51890 ms
+-Riorientato     --> Tempo medio: 0.00101 ms   Tempo peggiore: 0.04220 ms
+
+-Non riorientato --> Tempo medio: 0.00064 ms    Tempo peggiore: 0.56280 ms
+-Riorientato     --> Tempo medio: 0.00048 ms   Tempo peggiore: 0.00850 ms
+
+-Non riorientato --> Tempo medio: 0.00066 ms    Tempo peggiore: 0.44240 ms
+-Riorientato     --> Tempo medio: 0.00052 ms   Tempo peggiore: 0.12640 ms
+
+-Non riorientato --> Tempo medio: 0.00063 ms    Tempo peggiore: 0.41480 ms
+-Riorientato     --> Tempo medio: 0.00048 ms   Tempo peggiore: 0.26680 ms
+
+-Non riorientato --> Tempo medio: 0.00067 ms    Tempo peggiore: 0.44450 ms
+-Riorientato     --> Tempo medio: 0.00052 ms   Tempo peggiore: 0.17690 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo random con 1000 nodi e 2n archi, grado massimo 11, core massimo 4, core medio 2
+
+-Non riorientato --> Tempo medio: 0.00032 ms    Tempo peggiore: 0.40770 ms
+-Riorientato     --> Tempo medio: 0.00026 ms   Tempo peggiore: 0.19000 ms
+
+-Non riorientato --> Tempo medio: 0.00033 ms    Tempo peggiore: 0.46590 ms
+-Riorientato     --> Tempo medio: 0.00027 ms   Tempo peggiore: 0.07910 ms
+
+-Non riorientato --> Tempo medio: 0.00032 ms    Tempo peggiore: 0.42560 ms
+-Riorientato     --> Tempo medio: 0.00029 ms   Tempo peggiore: 0.11220 ms
+
+-Non riorientato --> Tempo medio: 0.00034 ms    Tempo peggiore: 0.44980 ms
+-Riorientato     --> Tempo medio: 0.00027 ms   Tempo peggiore: 0.22490 ms
+
+-Non riorientato --> Tempo medio: 0.00034 ms    Tempo peggiore: 0.43860 ms
+-Riorientato     --> Tempo medio: 0.00029 ms   Tempo peggiore: 0.11120 ms
+
+-Non riorientato --> Tempo medio: 0.00103 ms    Tempo peggiore: 0.44280 ms
+-Riorientato     --> Tempo medio: 0.00051 ms   Tempo peggiore: 0.15810 ms
+
+-Non riorientato --> Tempo medio: 0.00036 ms    Tempo peggiore: 0.44900 ms
+-Riorientato     --> Tempo medio: 0.00030 ms   Tempo peggiore: 0.05600 ms
+
+-Non riorientato --> Tempo medio: 0.00039 ms    Tempo peggiore: 0.42530 ms
+-Riorientato     --> Tempo medio: 0.00033 ms   Tempo peggiore: 0.16690 ms
+
+-Non riorientato --> Tempo medio: 0.00036 ms    Tempo peggiore: 0.45980 ms
+-Riorientato     --> Tempo medio: 0.00026 ms   Tempo peggiore: 0.16840 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo random con 1000 nodi e 3n archi, grado massimo 16, core massimo 5, core medio 3
+
+-Non riorientato --> Tempo medio: 0.00032 ms    Tempo peggiore: 0.46660 ms
+-Riorientato     --> Tempo medio: 0.00019 ms   Tempo peggiore: 0.16030 ms
+
+-Non riorientato --> Tempo medio: 0.00032 ms    Tempo peggiore: 0.38690 ms
+-Riorientato     --> Tempo medio: 0.00017 ms   Tempo peggiore: 0.10710 ms
+
+-Non riorientato --> Tempo medio: 0.00030 ms    Tempo peggiore: 0.38440 ms
+-Riorientato     --> Tempo medio: 0.00020 ms   Tempo peggiore: 0.01110 ms
+
+-Non riorientato --> Tempo medio: 0.00029 ms    Tempo peggiore: 0.36460 ms
+-Riorientato     --> Tempo medio: 0.00019 ms   Tempo peggiore: 0.13790 ms
+
+-Non riorientato --> Tempo medio: 0.00038 ms    Tempo peggiore: 0.37320 ms
+-Riorientato     --> Tempo medio: 0.00024 ms   Tempo peggiore: 0.20710 ms
+
+-Non riorientato --> Tempo medio: 0.00030 ms    Tempo peggiore: 0.34800 ms
+-Riorientato     --> Tempo medio: 0.00021 ms   Tempo peggiore: 0.60710 ms
+
+-Non riorientato --> Tempo medio: 0.00029 ms    Tempo peggiore: 0.35410 ms
+-Riorientato     --> Tempo medio: 0.00022 ms   Tempo peggiore: 0.07200 ms
+
+-Non riorientato --> Tempo medio: 0.00031 ms    Tempo peggiore: 0.48030 ms
+-Riorientato     --> Tempo medio: 0.00019 ms   Tempo peggiore: 0.17430 ms
+
+-Non riorientato --> Tempo medio: 0.00030 ms    Tempo peggiore: 0.42020 ms
+-Riorientato     --> Tempo medio: 0.00021 ms   Tempo peggiore: 0.46580 ms
+
+-Non riorientato --> Tempo medio: 0.00031 ms    Tempo peggiore: 0.76790 ms
+-Riorientato     --> Tempo medio: 0.00018 ms   Tempo peggiore: 0.16250 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo random con 1000 nodi e 5n archi, grado massimo 21, core massimo 7, core medio 5
+
+-Non riorientato --> Tempo medio: 0.00015 ms    Tempo peggiore: 0.38360 ms
+-Riorientato     --> Tempo medio: 0.00017 ms   Tempo peggiore: 0.48000 ms
+
+-Non riorientato --> Tempo medio: 0.00014 ms    Tempo peggiore: 0.37290 ms
+-Riorientato     --> Tempo medio: 0.00013 ms   Tempo peggiore: 0.43100 ms
+
+-Non riorientato --> Tempo medio: 0.00017 ms    Tempo peggiore: 0.57290 ms
+-Riorientato     --> Tempo medio: 0.00016 ms   Tempo peggiore: 0.37930 ms
+
+-Non riorientato --> Tempo medio: 0.00016 ms    Tempo peggiore: 0.40000 ms
+-Riorientato     --> Tempo medio: 0.00014 ms   Tempo peggiore: 0.11870 ms
+
+-Non riorientato --> Tempo medio: 0.00014 ms    Tempo peggiore: 0.35210 ms
+-Riorientato     --> Tempo medio: 0.00013 ms   Tempo peggiore: 0.40600 ms
+
+-Non riorientato --> Tempo medio: 0.00014 ms    Tempo peggiore: 0.37440 ms
+-Riorientato     --> Tempo medio: 0.00014 ms   Tempo peggiore: 0.64960 ms
+
+-Non riorientato --> Tempo medio: 0.00015 ms    Tempo peggiore: 0.36440 ms
+-Riorientato     --> Tempo medio: 0.00014 ms   Tempo peggiore: 0.19220 ms
+
+-Non riorientato --> Tempo medio: 0.00013 ms    Tempo peggiore: 0.38830 ms
+-Riorientato     --> Tempo medio: 0.00014 ms   Tempo peggiore: 0.12930 ms
+
+-Non riorientato --> Tempo medio: 0.00015 ms    Tempo peggiore: 0.36490 ms
+-Riorientato     --> Tempo medio: 0.00013 ms   Tempo peggiore: 0.07350 ms
+
+-Non riorientato --> Tempo medio: 0.00016 ms    Tempo peggiore: 0.34870 ms
+-Riorientato     --> Tempo medio: 0.00017 ms   Tempo peggiore: 0.18400 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo random con 1000 nodi e 10n archi, grado massimo 36, core massimo 13, core medio 12
+
+-Non riorientato --> Tempo medio: 0.00007 ms    Tempo peggiore: 0.45860 ms
+-Riorientato     --> Tempo medio: 0.00006 ms   Tempo peggiore: 0.48630 ms
+
+-Non riorientato --> Tempo medio: 0.00007 ms    Tempo peggiore: 0.44120 ms
+-Riorientato     --> Tempo medio: 0.00007 ms   Tempo peggiore: 0.11060 ms
+
+-Non riorientato --> Tempo medio: 0.00008 ms    Tempo peggiore: 0.60370 ms
+-Riorientato     --> Tempo medio: 0.00011 ms   Tempo peggiore: 0.35550 ms
+
+-Non riorientato --> Tempo medio: 0.00007 ms    Tempo peggiore: 0.39760 ms
+-Riorientato     --> Tempo medio: 0.00008 ms   Tempo peggiore: 0.13870 ms
+
+-Non riorientato --> Tempo medio: 0.00008 ms    Tempo peggiore: 0.55490 ms
+-Riorientato     --> Tempo medio: 0.00007 ms   Tempo peggiore: 0.16840 ms
+
+-Non riorientato --> Tempo medio: 0.00008 ms    Tempo peggiore: 0.43650 ms
+-Riorientato     --> Tempo medio: 0.00008 ms   Tempo peggiore: 0.15530 ms
+
+-Non riorientato --> Tempo medio: 0.00008 ms    Tempo peggiore: 0.43160 ms
+-Riorientato     --> Tempo medio: 0.00007 ms   Tempo peggiore: 0.16150 ms
+
+-Non riorientato --> Tempo medio: 0.00007 ms    Tempo peggiore: 0.39410 ms
+-Riorientato     --> Tempo medio: 0.00006 ms   Tempo peggiore: 0.14940 ms
+
+Verifica adiacenza di 10'000 coppie random su grafo random con 1000 nodi e 0,5n archi, grado massimo 5, core massimo 2, core medio 0
+
+-Non riorientato --> Tempo medio: 0.00126 ms    Tempo peggiore: 0.43470 ms
+-Riorientato     --> Tempo medio: 0.00091 ms   Tempo peggiore: 0.02920 ms
+
+-Non riorientato --> Tempo medio: 0.00116 ms    Tempo peggiore: 0.45550 ms
+-Riorientato     --> Tempo medio: 0.00106 ms   Tempo peggiore: 0.09010 ms
+
+-Non riorientato --> Tempo medio: 0.00115 ms    Tempo peggiore: 0.42450 ms
+-Riorientato     --> Tempo medio: 0.00082 ms   Tempo peggiore: 0.05760 ms
+
+-Non riorientato --> Tempo medio: 0.00128 ms    Tempo peggiore: 0.50720 ms
+-Riorientato     --> Tempo medio: 0.00111 ms   Tempo peggiore: 0.08910 ms
+
+-Non riorientato --> Tempo medio: 0.00113 ms    Tempo peggiore: 0.45870 ms
+-Riorientato     --> Tempo medio: 0.00083 ms   Tempo peggiore: 0.00760 ms
+
+-Non riorientato --> Tempo medio: 0.00116 ms    Tempo peggiore: 0.45850 ms
+-Riorientato     --> Tempo medio: 0.00078 ms   Tempo peggiore: 0.00390 ms
+
+-Non riorientato --> Tempo medio: 0.00130 ms    Tempo peggiore: 0.43730 ms
+-Riorientato     --> Tempo medio: 0.00098 ms   Tempo peggiore: 0.06460 ms
+
+-Non riorientato --> Tempo medio: 0.00099 ms    Tempo peggiore: 0.40750 ms
+-Riorientato     --> Tempo medio: 0.00104 ms   Tempo peggiore: 0.16570 ms
+
+-Non riorientato --> Tempo medio: 0.00113 ms    Tempo peggiore: 0.41170 ms
+-Riorientato     --> Tempo medio: 0.00080 ms   Tempo peggiore: 0.09860 ms
+
+-Non riorientato --> Tempo medio: 0.00096 ms    Tempo peggiore: 0.41410 ms
+-Riorientato     --> Tempo medio: 0.00083 ms   Tempo peggiore: 0.01410 ms

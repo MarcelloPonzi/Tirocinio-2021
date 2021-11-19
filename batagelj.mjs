@@ -135,6 +135,5 @@ export default function riorientatorePerCore(grafo) {
         item.obj.to.archiEntranti.inserisciCoda(item.obj, 'entrPos');
         item = item.next;
     }
-
     return deg;
 }
