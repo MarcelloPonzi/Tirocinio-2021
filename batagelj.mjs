@@ -2,7 +2,6 @@
 //e riorienta il grafo
 export default function riorientatorePerCore(grafo) {
     grafo.calcolatoreMaxGrado();
-    console.log("Il grado massimo è " + grafo.max_grado);
     //codice che controlla gli id siano uniformi e si sosseguano senza "salti"(condizione necessaria)
     //e in caso non lo siano li aggiusta
     let item = grafo.nodi.head;
@@ -119,6 +118,7 @@ export default function riorientatorePerCore(grafo) {
                 //from è il nodo che sto eliminando, in modo da avere l'arco orientato uscendo
                 a.obj.from = n;
                 a.obj.to = u;
+                grafo.archiRiorientati++;
             }
 
             //passo al prossimo u adiacente a n

@@ -10,6 +10,7 @@ export default class Grafo {
         this.max_id_archi = 0;
         this.max_grado = 0;
         this.adiacenze = [];
+        this.archiRiorientati = 0;
     }
     calcolatoreMaxGrado() {
         let item = this.nodi.head;

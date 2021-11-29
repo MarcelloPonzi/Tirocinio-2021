@@ -20,7 +20,16 @@ import {
     sumSimple
 } from "simple-statistics";
 
-
+//Tipi di grafo da caricare:
+const planare1000n0_5ne = "./planar_1000n_0,5ne.graphml";
+const planare1000n1ne = "./planar_1000n_1ne.graphml";
+const planare1000n1_5ne = "./planar_1000n_1,5ne.graphml";
+const planare1000nmaxe = "./planar_1000n_maxe.graphml";
+const albero1000n5d5c = "./tree_1000n_depth5_child5.graphml";
+const random1000n1ne = "./random_1000n_1ne.graphml";
+const random1000n2ne = "./random_1000n_2ne.graphml";
+const random1000n5ne = "./random_1000n_5ne.graphml";
+const input = [planare1000n0_5ne, planare1000n1ne, planare1000n1_5ne, planare1000nmaxe, albero1000n5d5c, random1000n1ne, random1000n2ne, random1000n5ne];
 
 //FUNZIONI CREAZIONE GRAFO
 
@@ -214,9 +223,10 @@ function verificaAdiacenzaRiorientato(nodo1, nodo2) {
 var grafo = new Grafo();
 var controlli1 = 0;
 var controlli2 = 0;
+const n = 100;
 
 //lettura GRAPHML
-var graphmlString = readFileSync("./input.graphml")
+var graphmlString = readFileSync(planare1000n1_5ne);
 var parser = new GraphMLParser();
 parser.parse(graphmlString, function (err, graph) {
     //creazione array di oggetti da parsed graphml
@@ -233,48 +243,60 @@ var temp = 0;
 var tempoPeggiore1 = 0;
 const t3 = performance.now();
 arrayCoppie.forEach(coppia => {
-    temp = verificaAdiacenza(arrayNodi[coppia[0]], arrayNodi[coppia[1]]);
-    if (temp > tempoPeggiore1) {
-        tempoPeggiore1 = temp;
+    for (let i = 0; i < n; i++) {
+        temp = temp + verificaAdiacenza(arrayNodi[coppia[0]], arrayNodi[coppia[1]]);
+        if (temp > tempoPeggiore1) {
+            tempoPeggiore1 = temp;
+        }
     }
 });
 const t4 = performance.now();
-console.log("verificaAdiacenza ha impiegato " + (t4 - t3) + " millisecondi con " + controlli1 + " controlli con tempo peggiore = " + tempoPeggiore1);
+
 
 
 //rioriento il grafo
 console.log("\nCalcolo K core dei nodi e rioriento il grafo")
 let core = riorientatorePerCore(grafo);
 
-// console.log("Core number dei nodi: ")
-// console.log(core);
-var maxCore = 0;
+//Parametri caratterizzanti il grafo
+var coreMassimo = 0;
 for (let i = 0; i <= core.length - 1; i++) {
-    if (maxCore < core[i]) {
-        maxCore = core[i];
+    if (coreMassimo < core[i]) {
+        coreMassimo = core[i];
     }
 }
-console.log("Il core massimo è: " + maxCore);
 var coreMedio = Math.floor(sumSimple(core) / core.length);
-console.log(coreMedio);
+
+var gradoMassimo = grafo.max_grado;
+var gradoMedio = (2 * grafo.archi.dimensione) / grafo.nodi.dimensione;
 
 var tempoPeggiore2 = 0;
 //misuro il tempo sul grafo riorientato
 const a1 = performance.now();
 temp = 0;
+//misuro ogni coppia n volte per ridurre la latenza
 arrayCoppie.forEach(coppia => {
-    temp = verificaAdiacenzaRiorientato(arrayNodi[coppia[0]], arrayNodi[coppia[1]]);
-    if (temp > tempoPeggiore2) {
-        tempoPeggiore2 = temp;
+    for (let i = 0; i < n; i++) {
+        temp = temp + verificaAdiacenzaRiorientato(arrayNodi[coppia[0]], arrayNodi[coppia[1]]);
+        if (temp > tempoPeggiore2) {
+            tempoPeggiore2 = temp;
+        }
     }
+
 });
 const a2 = performance.now();
-console.log("verificaAdiacenzaRiorientato ha impiegato " + (a2 - a1) + " millisecondi con " + controlli2 + " controlli con tempo peggiore = " + tempoPeggiore2);
+//Aggiusto controlli e tempi compensando gli n controlli su ogni coppia 
+controlli1 = controlli1 / n;
+controlli2 = controlli2 / n;
+tempoPeggiore1 = tempoPeggiore1 / n;
+tempoPeggiore2 = tempoPeggiore2 / n;
+//Stampa statistiche
+console.log("verificaAdiacenza ha impiegato " + (t4 - t3) + " millisecondi con tempo medio= " + (t4 - t3) / controlli1 + " e con tempo peggiore = " + tempoPeggiore1);
+console.log("verificaAdiacenzaRiorientato ha impiegato " + (a2 - a1) + " millisecondi con tempo medio= " + (a2 - a1) / controlli2 + " e con tempo peggiore = " + tempoPeggiore2);
 
-
-var statistiche1 = '\n\n-Non riorientato --> Tempo medio: ' + ((t4 - t3) / controlli1).toFixed(5) + ' ms    Tempo peggiore: ' + tempoPeggiore1.toFixed(5) + ' ms';
-var statistiche2 = '\n-Riorientato     --> Tempo medio: ' + ((a2 - a1) / controlli2).toFixed(5) + ' ms   Tempo peggiore: ' + tempoPeggiore2.toFixed(5) + ' ms';
-appendFileSync("Statistiche.txt", statistiche1 + statistiche2, "UTF-8", {
+var statistiche1 = '\n\n-Non riorientato    --> Tempo medio: ' + ((t4 - t3) / controlli1).toFixed(5) + ' ms    Tempo peggiore: ' + tempoPeggiore1.toFixed(5) + ' ms';
+var statistiche2 = '\n-Riorientato     --> Tempo medio: ' + ((a2 - a1) / controlli2).toFixed(5) + ' ms   Tempo peggiore: ' + tempoPeggiore2.toFixed(5) + ' ms    Archi riorientati: ' + grafo.archiRiorientati;
+appendFileSync("Statistiche.txt", "\nInput file graph: " + input + "\nGrado massimo: " + gradoMassimo + " Grado medio: " + gradoMedio + "\nCore massimo: " + coreMassimo + ' Core medio: ' + coreMedio + statistiche1 + statistiche2, "UTF-8", {
     'flags': 'a+'
 });
 

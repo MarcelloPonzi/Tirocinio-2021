@@ -14,7 +14,7 @@ export default function generatoreCoppieRandom(arrayNodi) {
     //     arrayNum[i] = i;
     // }
     //la dimensione max dell'arrayCoppie è la disposizione semplice, scelgo a piacere un numero minore di questo
-    const numCoppie = 10000;
+    const numCoppie = 50000;
     var arrayCoppie = new Array(numCoppie);
     for (let i = 0; i <= numCoppie; i++) {
         var coppia = new Array(2);
